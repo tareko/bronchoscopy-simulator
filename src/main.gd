@@ -9,6 +9,7 @@ extends Node3D
 const AirwayTreeScript := preload("res://src/anatomy/airway_tree.gd")
 const EndoscopeScript := preload("res://src/scope/endoscope.gd")
 const ProcedureLogScript := preload("res://src/metrics/procedure_log.gd")
+const TrackingSanityScript := preload("res://src/xr/tracking_sanity.gd")
 const TREE_PATH := "res://assets/anatomy/generic_adult.json"
 const MM_TO_M := 0.001
 
@@ -24,6 +25,15 @@ var _hud: Label
 var _origin: XROrigin3D
 var _xr_camera: XRCamera3D
 var _scope_view := false
+
+# head-tracking sanity sampling (see src/xr/tracking_sanity.gd)
+var _track_elapsed := 0.0
+var _track_started := false
+var _track_first_pos := Vector3.ZERO
+var _track_first_quat := Quaternion.IDENTITY
+var _track_pos_span := 0.0
+var _track_rot_span := 0.0
+var _track_verdict := ""
 
 
 func _ready() -> void:
@@ -170,6 +180,7 @@ func _process(delta: float) -> void:
 
 	var report := scope.advance(insert, lever, roll, delta)
 	log.track_frame(delta, report)
+	_sample_tracking(delta)
 	_update_visuals()
 
 
@@ -193,6 +204,34 @@ func _update_visuals() -> void:
 	_hud.text = "segment %s   depth %.0f mm   clearance %.1f mm\nW/S insert-retract  A/D steer  Q/E torque  R reset  Tab view" % [
 		label if not label.is_empty() else "-", depth, clearance,
 	]
+	if _track_verdict == "3dof_suspected":
+		_hud.text += "\n3-DoF TRACKING: rebuild Monado with the Lighthouse driver"
+
+
+## Sample head motion for a few seconds and warn if the headset is running in
+## 3-DoF (rotation without translation). Silently continuing would make every
+## airway feel flat and wreck the trainee's depth judgement.
+func _sample_tracking(delta: float) -> void:
+	if _xr_camera == null or not _track_verdict.is_empty():
+		return
+	_track_elapsed += delta
+	if not _track_started:
+		if _track_elapsed < 0.3:
+			return
+		_track_started = true
+		_track_first_pos = _xr_camera.global_position
+		_track_first_quat = _xr_camera.global_basis.get_rotation_quaternion()
+		return
+	_track_pos_span = maxf(_track_pos_span,
+		_xr_camera.global_position.distance_to(_track_first_pos) * 1000.0)
+	var quat := _xr_camera.global_basis.get_rotation_quaternion()
+	_track_rot_span = maxf(_track_rot_span, rad_to_deg(quat.angle_to(_track_first_quat)))
+	if _track_elapsed > 6.0:
+		_track_verdict = TrackingSanityScript.classify(_track_pos_span, _track_rot_span)
+		print("XR tracking check: %s (pos span %.0f mm, rot span %.0f deg)" % [
+			_track_verdict, _track_pos_span, _track_rot_span])
+		if _track_verdict == "3dof_suspected":
+			push_warning(TrackingSanityScript.advice(_track_verdict))
 
 
 ## Look at `target` without degenerating when the view direction is vertical

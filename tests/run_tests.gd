@@ -11,6 +11,7 @@ const AirwayTreeScript := preload("res://src/anatomy/airway_tree.gd")
 const EndoscopeScript := preload("res://src/scope/endoscope.gd")
 const ProcedureLogScript := preload("res://src/metrics/procedure_log.gd")
 const LeverMapperScript := preload("res://src/scope/lever_mapper.gd")
+const TrackingSanityScript := preload("res://src/xr/tracking_sanity.gd")
 
 const TREE_PATH := "res://assets/anatomy/generic_adult.json"
 
@@ -31,6 +32,7 @@ func _initialize() -> void:
 	_test_metrics_and_export()
 	_test_evidence_metrics()
 	_test_lever_mapper()
+	_test_tracking_sanity()
 	_test_scripted_run()
 
 	print("")
@@ -268,6 +270,20 @@ func _test_lever_mapper() -> void:
 	_check(mapped > 0.4 and mapped < 0.6, "half-deflected encoder should read ~0.48, got %.3f" % mapped)
 	_check(is_zero_approx(flat.map_angle(2048, 2048, 900)), "encoder at centre must read 0")
 	_check(is_zero_approx(flat.map_angle(2048 + 450, 2048, 0)), "uncalibrated encoder must read 0")
+
+
+func _test_tracking_sanity() -> void:
+	_begin("3-DoF headset detection")
+	_check(TrackingSanityScript.classify(5.0, 40.0) == "3dof_suspected",
+		"rotation without translation must be flagged as 3-DoF")
+	_check(TrackingSanityScript.classify(300.0, 3.0) == "insufficient_motion",
+		"a still head cannot be judged")
+	_check(TrackingSanityScript.classify(180.0, 35.0) == "6dof_ok",
+		"a normal session must pass")
+	_check(TrackingSanityScript.classify(0.0, 0.0) == "insufficient_motion",
+		"no motion at all must not raise a false alarm")
+	_check(TrackingSanityScript.advice("3dof_suspected").contains("Monado"),
+		"the 3-DoF advice should name the Monado build flags")
 
 
 func _test_scripted_run() -> void:

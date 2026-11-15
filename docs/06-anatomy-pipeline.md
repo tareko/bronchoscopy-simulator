@@ -13,6 +13,10 @@ and free of patient data. It contains:
   `direction`, `length_mm`, `radius_mm`, `depth_mm`, `scored`, `landmark`;
 - cumulative `depth_mm` from the incisors (carina at 245 mm by construction).
 
+For reference, BodyParts3D's tracheobronchial tree (`FMA7393`) is 95 OBJ files
+and 65,240 triangles — a realistic size for a district-model import, not a
+seamless lumen, so it is useful for landmarks and lobes rather than navigation.
+
 Dimensions are **illustrative**, assembled from typical adult values. They are
 not a normative table: the evidence review found no reliable published set of
 "cm from the incisors" per segment (wide spread, small samples), so we do not
@@ -93,14 +97,16 @@ clinician signs off the labels.
 
 | Source | Licence | Usable? |
 | --- | --- | --- |
-| BodyParts3D | CC BY-SA 2.1 JP | share-alike: only as a **separate asset pack**, never merged into MIT code |
+| BodyParts3D | **dual**: current licence page says CC BY 4.0, the 2013 OBJ headers still say CC BY-SA 2.1 JP | attribute **both**; only as a **separate asset pack**, never merged into MIT code |
 | AnatomyStandard | CC BY-NC | **no** — incompatible with this project |
 | Zygote | commercial | no |
 | Z-Anatomy | CC BY-SA 4.0 (Blender `.blend`, ~291 MB) | share-alike: separate asset pack only, like BodyParts3D |
 | NIH 3D Print Exchange | per-entry | case by case |
 | LIDC-IDRI | CC BY 3.0 (with access agreement) | yes, with attribution |
-| ATM'22 challenge data | redistribution **prohibited** | no — cannot be committed or shipped |
-| TotalSegmentator | Apache-2.0 code/weights | yes, and its `lung_vessels` task yields `lung_airways` |
+| ATM'22 challenge data | CC BY 4.0 on the Zenodo deposit, but the challenge site **forbids redistribution** | no — contradictory terms, so not usable |
+| **AeroPath** | CC BY 4.0 | **yes** — 27 CTs with airway masks, the cleanest open airway CT source |
+| TCIA | per-collection | no airway/bronchoscopy collection exists (searched) |
+| TotalSegmentator | Apache-2.0 **per task** — the `total`/`lung_vessels` path is in the free set, some newer tasks are not | yes for our path; check the task before adding |
 | BronchSim (browser) | CC BY 4.0 | study/reference, not a dependency |
 | Fraxinus | BSD-3 | study for the CT → route → virtual bronchoscopy pipeline |
 
