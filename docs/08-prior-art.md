@@ -77,6 +77,24 @@ product. CAE's AccuTouch has left the catalogue; Simbionix is now Surgical
 Science; Level Ex's Airway Ex has pivoted. The market is one incumbent plus
 niche devices — which is why an open, Linux-first trainer has room.
 
+## Physical and headset-based trainers (indicative — verify before citing)
+
+From an archived vendor draft (`docs/research/archive/vendor-landscape-local-draft.md`)
+written by a local-model subagent. Useful as a map of the field; **the numbers
+and specs below are unverified** and must be confirmed against the vendor before
+anyone repeats them in a paper or a pitch.
+
+| Product | Maker | Kind | Claimed detail |
+| --- | --- | --- | --- |
+| KYOTO KAGAKU MW19 | Kyoto Kagaku (JP) | physical manikin + real fibrescope | airway to B1–B10 bifurcations, adjustable difficulty, list ~USD 2,150 |
+| Koken LM-092 / LM-099 | Koken (JP) | silicone airway phantoms | LM-099 adds EBUS-TBNA with embedded nodes; used in Naik 2026, Okachi 2026 |
+| BRONCH Mentor (JP rebrand) | Kyoto Kagaku KAD-4/5 | same cart, rebranded | — |
+| AVP / Holoeyes MR bronchoscopy | Fujita Health Univ. + Nagoya Univ. | Apple Vision Pro / HoloLens 2 + real scope + phantom | 10 patient-derived CT datasets, time-to-target and SSQ metrics; **no clinical benefit claimed** |
+
+The last row is the closest thing to headset-based bronchoscopy research found,
+and it is a prototype, not a product. That is consistent with `docs/01`: there is
+still no HMD validity evidence for bronchoscopy training.
+
 ## Evidence-quality warnings
 
 - Vendor hardware/haptic claims are marketing; no independent fidelity benchmark

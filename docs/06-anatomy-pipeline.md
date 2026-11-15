@@ -96,6 +96,7 @@ clinician signs off the labels.
 | BodyParts3D | CC BY-SA 2.1 JP | share-alike: only as a **separate asset pack**, never merged into MIT code |
 | AnatomyStandard | CC BY-NC | **no** — incompatible with this project |
 | Zygote | commercial | no |
+| Z-Anatomy | CC BY-SA 4.0 (Blender `.blend`, ~291 MB) | share-alike: separate asset pack only, like BodyParts3D |
 | NIH 3D Print Exchange | per-entry | case by case |
 | LIDC-IDRI | CC BY 3.0 (with access agreement) | yes, with attribution |
 | ATM'22 challenge data | redistribution **prohibited** | no — cannot be committed or shipped |
