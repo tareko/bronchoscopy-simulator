@@ -1,0 +1,48 @@
+# Godot
+.godot/
+*.translation
+export.cfg
+export_presets.cfg
+.import/
+*.tmp
+
+# Build output
+build/
+dist/
+*.AppImage
+*.flatpak
+*.snap
+*.pck
+*.zip
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Clinical data: never commit patient data or derived patient meshes
+datasets/
+data/raw/
+data/patients/
+*.dcm
+*.nii
+*.nii.gz
+*.nrrd
+*.mha
+*.mhd
+segmentation_output/
+
+# Session logs / exported metrics
+reports/
+*.session.json
+*.events.csv
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

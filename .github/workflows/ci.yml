@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.7.2"
+
+jobs:
+  tests:
+    name: Headless tests (Godot ${{ env.GODOT_VERSION }})
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install runtime deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends unzip ca-certificates
+
+      - name: Fetch Godot
+        run: |
+          set -euo pipefail
+          curl -sSL -o godot.zip \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip
+          mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" godot
+          chmod +x godot
+          ./godot --version
+
+      - name: Regenerate anatomy and verify it is committed state
+        run: |
+          python3 tools/gen_anatomy/generate_generic_tree.py \
+            --out assets/anatomy/generic_adult.json
+          git diff --exit-code assets/anatomy/generic_adult.json
+
+      - name: Import project
+        run: ./godot --headless --path . --editor --quit
+
+      - name: Run test suite
+        run: ./godot --headless --path . --script tests/run_tests.gd
+
+      - name: Smoke-run the scene
+        run: ./godot --headless --path . --quit-after 120

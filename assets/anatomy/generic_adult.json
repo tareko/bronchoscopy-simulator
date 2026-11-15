@@ -1,0 +1,3690 @@
+{
+ "schema": "bronchsim.airway_tree/1",
+ "name": "generic_adult",
+ "display_name": "Generic adult airway",
+ "units": "mm",
+ "axis_convention": "+X subject left, +Y superior, +Z anterior; scope enters at incisors (origin)",
+ "generator": "tools/gen_anatomy/generate_generic_tree.py",
+ "seed": 20260,
+ "provenance": {
+  "kind": "synthetic",
+  "note": "Illustrative adult dimensions assembled from published bronchoscopy and CT morphometry. Not patient data; no consent required; safe to redistribute."
+ },
+ "tree": [
+  {
+   "id": "ENTRY",
+   "label": "ENTRY",
+   "name": "Oral route (incisors to vocal cords)",
+   "level": "route",
+   "parent": null,
+   "start_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "position_mm": [
+    0.0,
+    -130.0,
+    0.0
+   ],
+   "direction": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "length_mm": 130.0,
+   "radius_mm": 10.0,
+   "depth_mm": 130.0,
+   "scored": false,
+   "landmark": "incisors",
+   "path": [
+    "ENTRY"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)"
+   ]
+  },
+  {
+   "id": "TRACH",
+   "label": "TRACH",
+   "name": "Trachea",
+   "level": "conducting",
+   "parent": "ENTRY",
+   "start_mm": [
+    0.0,
+    -130.0,
+    0.0
+   ],
+   "position_mm": [
+    0.0,
+    -245.0,
+    0.0
+   ],
+   "direction": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "length_mm": 115.0,
+   "radius_mm": 8.5,
+   "depth_mm": 245.0,
+   "scored": false,
+   "landmark": "vocal_cords",
+   "path": [
+    "ENTRY",
+    "TRACH"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea"
+   ]
+  },
+  {
+   "id": "RMB",
+   "label": "RMB",
+   "name": "Right main bronchus",
+   "level": "lobar",
+   "parent": "TRACH",
+   "start_mm": [
+    0.0,
+    -245.0,
+    0.0
+   ],
+   "position_mm": [
+    -9.71,
+    -264.42,
+    -3.53
+   ],
+   "direction": [
+    -0.4412,
+    -0.8829,
+    -0.1606
+   ],
+   "length_mm": 22.0,
+   "radius_mm": 7.0,
+   "depth_mm": 267.0,
+   "scored": true,
+   "landmark": "main_carina",
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus"
+   ]
+  },
+  {
+   "id": "RUL",
+   "label": "RUL",
+   "name": "Right upper lobe bronchus",
+   "level": "lobar",
+   "parent": "RMB",
+   "start_mm": [
+    -9.71,
+    -264.42,
+    -3.53
+   ],
+   "position_mm": [
+    -20.56,
+    -265.15,
+    -1.88
+   ],
+   "direction": [
+    -0.9864,
+    -0.0661,
+    0.1502
+   ],
+   "length_mm": 11.0,
+   "radius_mm": 5.25,
+   "depth_mm": 278.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus"
+   ]
+  },
+  {
+   "id": "RB1",
+   "label": "RB1",
+   "name": "Apical segment, right upper lobe",
+   "level": "segmental",
+   "parent": "RUL",
+   "start_mm": [
+    -20.56,
+    -265.15,
+    -1.88
+   ],
+   "position_mm": [
+    -39.06,
+    -253.28,
+    -2.74
+   ],
+   "direction": [
+    -0.841,
+    0.5396,
+    -0.0392
+   ],
+   "length_mm": 22.0,
+   "radius_mm": 3.25,
+   "depth_mm": 300.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB1"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Apical segment, right upper lobe"
+   ]
+  },
+  {
+   "id": "RB1a",
+   "label": "RB1a",
+   "name": "Subsegment RB1a",
+   "level": "subsegmental",
+   "parent": "RB1",
+   "start_mm": [
+    -39.06,
+    -253.28,
+    -2.74
+   ],
+   "position_mm": [
+    -52.72,
+    -246.47,
+    -9.37
+   ],
+   "direction": [
+    -0.821,
+    0.4091,
+    -0.3982
+   ],
+   "length_mm": 16.64,
+   "radius_mm": 1.86,
+   "depth_mm": 316.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB1",
+    "RB1a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Apical segment, right upper lobe",
+    "Subsegment RB1a"
+   ]
+  },
+  {
+   "id": "RB1b",
+   "label": "RB1b",
+   "name": "Subsegment RB1b",
+   "level": "subsegmental",
+   "parent": "RB1",
+   "start_mm": [
+    -39.06,
+    -253.28,
+    -2.74
+   ],
+   "position_mm": [
+    -54.42,
+    -249.28,
+    1.37
+   ],
+   "direction": [
+    -0.9367,
+    0.2441,
+    0.2511
+   ],
+   "length_mm": 16.4,
+   "radius_mm": 1.98,
+   "depth_mm": 316.4,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB1",
+    "RB1b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Apical segment, right upper lobe",
+    "Subsegment RB1b"
+   ]
+  },
+  {
+   "id": "RB1c",
+   "label": "RB1c",
+   "name": "Subsegment RB1c",
+   "level": "subsegmental",
+   "parent": "RB1",
+   "start_mm": [
+    -39.06,
+    -253.28,
+    -2.74
+   ],
+   "position_mm": [
+    -46.45,
+    -239.68,
+    -0.22
+   ],
+   "direction": [
+    -0.4713,
+    0.8671,
+    0.1611
+   ],
+   "length_mm": 15.69,
+   "radius_mm": 1.91,
+   "depth_mm": 315.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB1",
+    "RB1c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Apical segment, right upper lobe",
+    "Subsegment RB1c"
+   ]
+  },
+  {
+   "id": "RB2",
+   "label": "RB2",
+   "name": "Posterior segment, right upper lobe",
+   "level": "segmental",
+   "parent": "RUL",
+   "start_mm": [
+    -20.56,
+    -265.15,
+    -1.88
+   ],
+   "position_mm": [
+    -41.22,
+    -261.25,
+    -13.45
+   ],
+   "direction": [
+    -0.8609,
+    0.1626,
+    -0.4821
+   ],
+   "length_mm": 24.0,
+   "radius_mm": 3.25,
+   "depth_mm": 302.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB2"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Posterior segment, right upper lobe"
+   ]
+  },
+  {
+   "id": "RB2a",
+   "label": "RB2a",
+   "name": "Subsegment RB2a",
+   "level": "subsegmental",
+   "parent": "RB2",
+   "start_mm": [
+    -41.22,
+    -261.25,
+    -13.45
+   ],
+   "position_mm": [
+    -48.6,
+    -261.76,
+    -25.62
+   ],
+   "direction": [
+    -0.5181,
+    -0.0356,
+    -0.8546
+   ],
+   "length_mm": 14.24,
+   "radius_mm": 2.23,
+   "depth_mm": 316.2,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB2",
+    "RB2a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Posterior segment, right upper lobe",
+    "Subsegment RB2a"
+   ]
+  },
+  {
+   "id": "RB2b",
+   "label": "RB2b",
+   "name": "Subsegment RB2b",
+   "level": "subsegmental",
+   "parent": "RB2",
+   "start_mm": [
+    -41.22,
+    -261.25,
+    -13.45
+   ],
+   "position_mm": [
+    -55.03,
+    -265.18,
+    -18.12
+   ],
+   "direction": [
+    -0.9148,
+    -0.26,
+    -0.3092
+   ],
+   "length_mm": 15.1,
+   "radius_mm": 2.18,
+   "depth_mm": 317.1,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB2",
+    "RB2b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Posterior segment, right upper lobe",
+    "Subsegment RB2b"
+   ]
+  },
+  {
+   "id": "RB2c",
+   "label": "RB2c",
+   "name": "Subsegment RB2c",
+   "level": "subsegmental",
+   "parent": "RB2",
+   "start_mm": [
+    -41.22,
+    -261.25,
+    -13.45
+   ],
+   "position_mm": [
+    -55.73,
+    -254.09,
+    -17.69
+   ],
+   "direction": [
+    -0.8677,
+    0.4278,
+    -0.2531
+   ],
+   "length_mm": 16.73,
+   "radius_mm": 1.79,
+   "depth_mm": 318.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB2",
+    "RB2c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Posterior segment, right upper lobe",
+    "Subsegment RB2c"
+   ]
+  },
+  {
+   "id": "RB3",
+   "label": "RB3",
+   "name": "Anterior segment, right upper lobe",
+   "level": "segmental",
+   "parent": "RUL",
+   "start_mm": [
+    -20.56,
+    -265.15,
+    -1.88
+   ],
+   "position_mm": [
+    -37.1,
+    -262.04,
+    12.29
+   ],
+   "direction": [
+    -0.7519,
+    0.1413,
+    0.644
+   ],
+   "length_mm": 22.0,
+   "radius_mm": 3.0,
+   "depth_mm": 300.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB3"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Anterior segment, right upper lobe"
+   ]
+  },
+  {
+   "id": "RB3a",
+   "label": "RB3a",
+   "name": "Subsegment RB3a",
+   "level": "subsegmental",
+   "parent": "RB3",
+   "start_mm": [
+    -37.1,
+    -262.04,
+    12.29
+   ],
+   "position_mm": [
+    -49.89,
+    -257.94,
+    16.2
+   ],
+   "direction": [
+    -0.9142,
+    0.2932,
+    0.2798
+   ],
+   "length_mm": 14.0,
+   "radius_mm": 1.97,
+   "depth_mm": 314.0,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB3",
+    "RB3a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Anterior segment, right upper lobe",
+    "Subsegment RB3a"
+   ]
+  },
+  {
+   "id": "RB3b",
+   "label": "RB3b",
+   "name": "Subsegment RB3b",
+   "level": "subsegmental",
+   "parent": "RB3",
+   "start_mm": [
+    -37.1,
+    -262.04,
+    12.29
+   ],
+   "position_mm": [
+    -45.59,
+    -267.23,
+    25.27
+   ],
+   "direction": [
+    -0.5189,
+    -0.3172,
+    0.7938
+   ],
+   "length_mm": 16.36,
+   "radius_mm": 1.88,
+   "depth_mm": 316.4,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB3",
+    "RB3b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Anterior segment, right upper lobe",
+    "Subsegment RB3b"
+   ]
+  },
+  {
+   "id": "RB3c",
+   "label": "RB3c",
+   "name": "Subsegment RB3c",
+   "level": "subsegmental",
+   "parent": "RB3",
+   "start_mm": [
+    -37.1,
+    -262.04,
+    12.29
+   ],
+   "position_mm": [
+    -42.6,
+    -256.26,
+    23.64
+   ],
+   "direction": [
+    -0.3968,
+    0.4166,
+    0.8179
+   ],
+   "length_mm": 13.88,
+   "radius_mm": 2.05,
+   "depth_mm": 313.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "RUL",
+    "RB3",
+    "RB3c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Right upper lobe bronchus",
+    "Anterior segment, right upper lobe",
+    "Subsegment RB3c"
+   ]
+  },
+  {
+   "id": "BI",
+   "label": "BI",
+   "name": "Bronchus intermedius",
+   "level": "conducting",
+   "parent": "RMB",
+   "start_mm": [
+    -9.71,
+    -264.42,
+    -3.53
+   ],
+   "position_mm": [
+    -19.79,
+    -279.02,
+    -6.61
+   ],
+   "direction": [
+    -0.56,
+    -0.8106,
+    -0.171
+   ],
+   "length_mm": 18.0,
+   "radius_mm": 6.0,
+   "depth_mm": 285.0,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius"
+   ]
+  },
+  {
+   "id": "RML",
+   "label": "RML",
+   "name": "Right middle lobe bronchus",
+   "level": "lobar",
+   "parent": "BI",
+   "start_mm": [
+    -19.79,
+    -279.02,
+    -6.61
+   ],
+   "position_mm": [
+    -32.23,
+    -281.57,
+    -0.72
+   ],
+   "direction": [
+    -0.8887,
+    -0.1824,
+    0.4207
+   ],
+   "length_mm": 14.0,
+   "radius_mm": 4.5,
+   "depth_mm": 299.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus"
+   ]
+  },
+  {
+   "id": "RB4",
+   "label": "RB4",
+   "name": "Lateral segment, right middle lobe",
+   "level": "segmental",
+   "parent": "RML",
+   "start_mm": [
+    -32.23,
+    -281.57,
+    -0.72
+   ],
+   "position_mm": [
+    -44.92,
+    -276.5,
+    7.59
+   ],
+   "direction": [
+    -0.7936,
+    0.3168,
+    0.5195
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 315.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB4"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Lateral segment, right middle lobe"
+   ]
+  },
+  {
+   "id": "RB4a",
+   "label": "RB4a",
+   "name": "Subsegment RB4a",
+   "level": "subsegmental",
+   "parent": "RB4",
+   "start_mm": [
+    -44.92,
+    -276.5,
+    7.59
+   ],
+   "position_mm": [
+    -55.04,
+    -271.45,
+    10.15
+   ],
+   "direction": [
+    -0.8726,
+    0.4356,
+    0.221
+   ],
+   "length_mm": 11.59,
+   "radius_mm": 1.71,
+   "depth_mm": 326.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB4",
+    "RB4a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Lateral segment, right middle lobe",
+    "Subsegment RB4a"
+   ]
+  },
+  {
+   "id": "RB4b",
+   "label": "RB4b",
+   "name": "Subsegment RB4b",
+   "level": "subsegmental",
+   "parent": "RB4",
+   "start_mm": [
+    -44.92,
+    -276.5,
+    7.59
+   ],
+   "position_mm": [
+    -52.28,
+    -277.17,
+    14.67
+   ],
+   "direction": [
+    -0.7187,
+    -0.0652,
+    0.6922
+   ],
+   "length_mm": 10.23,
+   "radius_mm": 1.99,
+   "depth_mm": 325.2,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB4",
+    "RB4b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Lateral segment, right middle lobe",
+    "Subsegment RB4b"
+   ]
+  },
+  {
+   "id": "RB4c",
+   "label": "RB4c",
+   "name": "Subsegment RB4c",
+   "level": "subsegmental",
+   "parent": "RB4",
+   "start_mm": [
+    -44.92,
+    -276.5,
+    7.59
+   ],
+   "position_mm": [
+    -50.27,
+    -269.0,
+    14.42
+   ],
+   "direction": [
+    -0.4665,
+    0.6542,
+    0.5953
+   ],
+   "length_mm": 11.47,
+   "radius_mm": 1.97,
+   "depth_mm": 326.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB4",
+    "RB4c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Lateral segment, right middle lobe",
+    "Subsegment RB4c"
+   ]
+  },
+  {
+   "id": "RB5",
+   "label": "RB5",
+   "name": "Medial segment, right middle lobe",
+   "level": "segmental",
+   "parent": "RML",
+   "start_mm": [
+    -32.23,
+    -281.57,
+    -0.72
+   ],
+   "position_mm": [
+    -38.82,
+    -281.03,
+    13.85
+   ],
+   "direction": [
+    -0.4122,
+    0.034,
+    0.9105
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 315.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB5"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Medial segment, right middle lobe"
+   ]
+  },
+  {
+   "id": "RB5a",
+   "label": "RB5a",
+   "name": "Subsegment RB5a",
+   "level": "subsegmental",
+   "parent": "RB5",
+   "start_mm": [
+    -38.82,
+    -281.03,
+    13.85
+   ],
+   "position_mm": [
+    -48.94,
+    -280.36,
+    21.53
+   ],
+   "direction": [
+    -0.7951,
+    0.0526,
+    0.6042
+   ],
+   "length_mm": 12.72,
+   "radius_mm": 1.72,
+   "depth_mm": 327.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB5",
+    "RB5a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Medial segment, right middle lobe",
+    "Subsegment RB5a"
+   ]
+  },
+  {
+   "id": "RB5b",
+   "label": "RB5b",
+   "name": "Subsegment RB5b",
+   "level": "subsegmental",
+   "parent": "RB5",
+   "start_mm": [
+    -38.82,
+    -281.03,
+    13.85
+   ],
+   "position_mm": [
+    -41.14,
+    -285.99,
+    24.38
+   ],
+   "direction": [
+    -0.1949,
+    -0.4184,
+    0.8871
+   ],
+   "length_mm": 11.88,
+   "radius_mm": 1.95,
+   "depth_mm": 326.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB5",
+    "RB5b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Medial segment, right middle lobe",
+    "Subsegment RB5b"
+   ]
+  },
+  {
+   "id": "RB5c",
+   "label": "RB5c",
+   "name": "Subsegment RB5c",
+   "level": "subsegmental",
+   "parent": "RB5",
+   "start_mm": [
+    -38.82,
+    -281.03,
+    13.85
+   ],
+   "position_mm": [
+    -39.21,
+    -276.46,
+    25.65
+   ],
+   "direction": [
+    -0.0307,
+    0.361,
+    0.9321
+   ],
+   "length_mm": 12.66,
+   "radius_mm": 2.06,
+   "depth_mm": 327.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RML",
+    "RB5",
+    "RB5c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right middle lobe bronchus",
+    "Medial segment, right middle lobe",
+    "Subsegment RB5c"
+   ]
+  },
+  {
+   "id": "RLL",
+   "label": "RLL",
+   "name": "Right lower lobe bronchus",
+   "level": "lobar",
+   "parent": "BI",
+   "start_mm": [
+    -19.79,
+    -279.02,
+    -6.61
+   ],
+   "position_mm": [
+    -26.14,
+    -282.45,
+    -10.06
+   ],
+   "direction": [
+    -0.7941,
+    -0.4289,
+    -0.4306
+   ],
+   "length_mm": 8.0,
+   "radius_mm": 5.25,
+   "depth_mm": 293.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus"
+   ]
+  },
+  {
+   "id": "RB6",
+   "label": "RB6",
+   "name": "Superior (apical) segment, right lower lobe",
+   "level": "segmental",
+   "parent": "RLL",
+   "start_mm": [
+    -26.14,
+    -282.45,
+    -10.06
+   ],
+   "position_mm": [
+    -32.58,
+    -282.66,
+    -24.7
+   ],
+   "direction": [
+    -0.4024,
+    -0.013,
+    -0.9154
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.25,
+   "depth_mm": 309.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB6"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Superior (apical) segment, right lower lobe"
+   ]
+  },
+  {
+   "id": "RB6a",
+   "label": "RB6a",
+   "name": "Subsegment RB6a",
+   "level": "subsegmental",
+   "parent": "RB6",
+   "start_mm": [
+    -32.58,
+    -282.66,
+    -24.7
+   ],
+   "position_mm": [
+    -40.54,
+    -283.21,
+    -31.04
+   ],
+   "direction": [
+    -0.7811,
+    -0.0544,
+    -0.622
+   ],
+   "length_mm": 10.19,
+   "radius_mm": 2.27,
+   "depth_mm": 319.2,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB6",
+    "RB6a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Superior (apical) segment, right lower lobe",
+    "Subsegment RB6a"
+   ]
+  },
+  {
+   "id": "RB6b",
+   "label": "RB6b",
+   "name": "Subsegment RB6b",
+   "level": "subsegmental",
+   "parent": "RB6",
+   "start_mm": [
+    -32.58,
+    -282.66,
+    -24.7
+   ],
+   "position_mm": [
+    -34.57,
+    -279.33,
+    -36.19
+   ],
+   "direction": [
+    -0.1644,
+    0.2742,
+    -0.9475
+   ],
+   "length_mm": 12.12,
+   "radius_mm": 1.91,
+   "depth_mm": 321.1,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB6",
+    "RB6b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Superior (apical) segment, right lower lobe",
+    "Subsegment RB6b"
+   ]
+  },
+  {
+   "id": "RB6c",
+   "label": "RB6c",
+   "name": "Subsegment RB6c",
+   "level": "subsegmental",
+   "parent": "RB6",
+   "start_mm": [
+    -32.58,
+    -282.66,
+    -24.7
+   ],
+   "position_mm": [
+    -34.67,
+    -286.25,
+    -34.75
+   ],
+   "direction": [
+    -0.1921,
+    -0.3303,
+    -0.9241
+   ],
+   "length_mm": 10.88,
+   "radius_mm": 2.1,
+   "depth_mm": 319.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB6",
+    "RB6c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Superior (apical) segment, right lower lobe",
+    "Subsegment RB6c"
+   ]
+  },
+  {
+   "id": "RB_TRUNK",
+   "label": "RB_TRUNK",
+   "name": "Right basal trunk",
+   "level": "conducting",
+   "parent": "RLL",
+   "start_mm": [
+    -26.14,
+    -282.45,
+    -10.06
+   ],
+   "position_mm": [
+    -37.66,
+    -285.81,
+    -17.27
+   ],
+   "direction": [
+    -0.8229,
+    -0.2398,
+    -0.515
+   ],
+   "length_mm": 14.0,
+   "radius_mm": 4.5,
+   "depth_mm": 307.0,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk"
+   ]
+  },
+  {
+   "id": "RB7",
+   "label": "RB7",
+   "name": "Medial basal segment",
+   "level": "segmental",
+   "parent": "RB_TRUNK",
+   "start_mm": [
+    -37.66,
+    -285.81,
+    -17.27
+   ],
+   "position_mm": [
+    -52.34,
+    -284.1,
+    -19.82
+   ],
+   "direction": [
+    -0.9788,
+    0.1137,
+    -0.1706
+   ],
+   "length_mm": 15.0,
+   "radius_mm": 2.75,
+   "depth_mm": 322.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB7"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Medial basal segment"
+   ]
+  },
+  {
+   "id": "RB7a",
+   "label": "RB7a",
+   "name": "Subsegment RB7a",
+   "level": "subsegmental",
+   "parent": "RB7",
+   "start_mm": [
+    -52.34,
+    -284.1,
+    -19.82
+   ],
+   "position_mm": [
+    -62.39,
+    -284.26,
+    -25.84
+   ],
+   "direction": [
+    -0.858,
+    -0.0136,
+    -0.5134
+   ],
+   "length_mm": 11.71,
+   "radius_mm": 1.92,
+   "depth_mm": 333.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB7",
+    "RB7a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Medial basal segment",
+    "Subsegment RB7a"
+   ]
+  },
+  {
+   "id": "RB7b",
+   "label": "RB7b",
+   "name": "Subsegment RB7b",
+   "level": "subsegmental",
+   "parent": "RB7",
+   "start_mm": [
+    -52.34,
+    -284.1,
+    -19.82
+   ],
+   "position_mm": [
+    -63.8,
+    -285.66,
+    -18.73
+   ],
+   "direction": [
+    -0.9865,
+    -0.1344,
+    0.0939
+   ],
+   "length_mm": 11.62,
+   "radius_mm": 1.81,
+   "depth_mm": 333.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB7",
+    "RB7b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Medial basal segment",
+    "Subsegment RB7b"
+   ]
+  },
+  {
+   "id": "RB7c",
+   "label": "RB7c",
+   "name": "Subsegment RB7c",
+   "level": "subsegmental",
+   "parent": "RB7",
+   "start_mm": [
+    -52.34,
+    -284.1,
+    -19.82
+   ],
+   "position_mm": [
+    -62.67,
+    -278.65,
+    -20.54
+   ],
+   "direction": [
+    -0.8826,
+    0.4661,
+    -0.0611
+   ],
+   "length_mm": 11.7,
+   "radius_mm": 1.59,
+   "depth_mm": 333.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB7",
+    "RB7c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Medial basal segment",
+    "Subsegment RB7c"
+   ]
+  },
+  {
+   "id": "RB8",
+   "label": "RB8",
+   "name": "Anterior basal segment",
+   "level": "segmental",
+   "parent": "RB_TRUNK",
+   "start_mm": [
+    -37.66,
+    -285.81,
+    -17.27
+   ],
+   "position_mm": [
+    -52.93,
+    -283.93,
+    -21.67
+   ],
+   "direction": [
+    -0.9542,
+    0.1173,
+    -0.275
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 323.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB8"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Anterior basal segment"
+   ]
+  },
+  {
+   "id": "RB8a",
+   "label": "RB8a",
+   "name": "Subsegment RB8a",
+   "level": "subsegmental",
+   "parent": "RB8",
+   "start_mm": [
+    -52.93,
+    -283.93,
+    -21.67
+   ],
+   "position_mm": [
+    -61.68,
+    -282.06,
+    -30.39
+   ],
+   "direction": [
+    -0.7004,
+    0.1497,
+    -0.6979
+   ],
+   "length_mm": 12.5,
+   "radius_mm": 1.73,
+   "depth_mm": 335.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB8",
+    "RB8a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Anterior basal segment",
+    "Subsegment RB8a"
+   ]
+  },
+  {
+   "id": "RB8b",
+   "label": "RB8b",
+   "name": "Subsegment RB8b",
+   "level": "subsegmental",
+   "parent": "RB8",
+   "start_mm": [
+    -52.93,
+    -283.93,
+    -21.67
+   ],
+   "position_mm": [
+    -61.73,
+    -286.33,
+    -20.82
+   ],
+   "direction": [
+    -0.9604,
+    -0.2626,
+    0.0928
+   ],
+   "length_mm": 9.16,
+   "radius_mm": 1.94,
+   "depth_mm": 332.2,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB8",
+    "RB8b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Anterior basal segment",
+    "Subsegment RB8b"
+   ]
+  },
+  {
+   "id": "RB8c",
+   "label": "RB8c",
+   "name": "Subsegment RB8c",
+   "level": "subsegmental",
+   "parent": "RB8",
+   "start_mm": [
+    -52.93,
+    -283.93,
+    -21.67
+   ],
+   "position_mm": [
+    -61.78,
+    -279.6,
+    -22.52
+   ],
+   "direction": [
+    -0.8951,
+    0.4374,
+    -0.0863
+   ],
+   "length_mm": 9.9,
+   "radius_mm": 1.9,
+   "depth_mm": 332.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB8",
+    "RB8c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Anterior basal segment",
+    "Subsegment RB8c"
+   ]
+  },
+  {
+   "id": "RB9",
+   "label": "RB9",
+   "name": "Lateral basal segment",
+   "level": "segmental",
+   "parent": "RB_TRUNK",
+   "start_mm": [
+    -37.66,
+    -285.81,
+    -17.27
+   ],
+   "position_mm": [
+    -48.53,
+    -280.9,
+    -27.93
+   ],
+   "direction": [
+    -0.6795,
+    0.3064,
+    -0.6667
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 323.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB9"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Lateral basal segment"
+   ]
+  },
+  {
+   "id": "RB9a",
+   "label": "RB9a",
+   "name": "Subsegment RB9a",
+   "level": "subsegmental",
+   "parent": "RB9",
+   "start_mm": [
+    -48.53,
+    -280.9,
+    -27.93
+   ],
+   "position_mm": [
+    -52.35,
+    -280.77,
+    -37.24
+   ],
+   "direction": [
+    -0.3792,
+    0.013,
+    -0.9252
+   ],
+   "length_mm": 10.06,
+   "radius_mm": 1.8,
+   "depth_mm": 333.1,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB9",
+    "RB9a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Lateral basal segment",
+    "Subsegment RB9a"
+   ]
+  },
+  {
+   "id": "RB9b",
+   "label": "RB9b",
+   "name": "Subsegment RB9b",
+   "level": "subsegmental",
+   "parent": "RB9",
+   "start_mm": [
+    -48.53,
+    -280.9,
+    -27.93
+   ],
+   "position_mm": [
+    -59.05,
+    -279.74,
+    -32.39
+   ],
+   "direction": [
+    -0.9162,
+    0.1012,
+    -0.3877
+   ],
+   "length_mm": 11.49,
+   "radius_mm": 1.8,
+   "depth_mm": 334.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB9",
+    "RB9b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Lateral basal segment",
+    "Subsegment RB9b"
+   ]
+  },
+  {
+   "id": "RB9c",
+   "label": "RB9c",
+   "name": "Subsegment RB9c",
+   "level": "subsegmental",
+   "parent": "RB9",
+   "start_mm": [
+    -48.53,
+    -280.9,
+    -27.93
+   ],
+   "position_mm": [
+    -53.1,
+    -273.8,
+    -32.62
+   ],
+   "direction": [
+    -0.4728,
+    0.7352,
+    -0.4857
+   ],
+   "length_mm": 9.66,
+   "radius_mm": 1.98,
+   "depth_mm": 332.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB9",
+    "RB9c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Lateral basal segment",
+    "Subsegment RB9c"
+   ]
+  },
+  {
+   "id": "RB10",
+   "label": "RB10",
+   "name": "Posterior basal segment",
+   "level": "segmental",
+   "parent": "RB_TRUNK",
+   "start_mm": [
+    -37.66,
+    -285.81,
+    -17.27
+   ],
+   "position_mm": [
+    -44.78,
+    -289.33,
+    -31.16
+   ],
+   "direction": [
+    -0.4449,
+    -0.2201,
+    -0.8681
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.25,
+   "depth_mm": 323.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB10"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Posterior basal segment"
+   ]
+  },
+  {
+   "id": "RB10a",
+   "label": "RB10a",
+   "name": "Subsegment RB10a",
+   "level": "subsegmental",
+   "parent": "RB10",
+   "start_mm": [
+    -44.78,
+    -289.33,
+    -31.16
+   ],
+   "position_mm": [
+    -44.48,
+    -290.16,
+    -42.78
+   ],
+   "direction": [
+    0.0252,
+    -0.0712,
+    -0.9971
+   ],
+   "length_mm": 11.66,
+   "radius_mm": 2.0,
+   "depth_mm": 334.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB10",
+    "RB10a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Posterior basal segment",
+    "Subsegment RB10a"
+   ]
+  },
+  {
+   "id": "RB10b",
+   "label": "RB10b",
+   "name": "Subsegment RB10b",
+   "level": "subsegmental",
+   "parent": "RB10",
+   "start_mm": [
+    -44.78,
+    -289.33,
+    -31.16
+   ],
+   "position_mm": [
+    -49.69,
+    -294.45,
+    -38.05
+   ],
+   "direction": [
+    -0.4965,
+    -0.5179,
+    -0.6966
+   ],
+   "length_mm": 9.89,
+   "radius_mm": 1.86,
+   "depth_mm": 332.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB10",
+    "RB10b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Posterior basal segment",
+    "Subsegment RB10b"
+   ]
+  },
+  {
+   "id": "RB10c",
+   "label": "RB10c",
+   "name": "Subsegment RB10c",
+   "level": "subsegmental",
+   "parent": "RB10",
+   "start_mm": [
+    -44.78,
+    -289.33,
+    -31.16
+   ],
+   "position_mm": [
+    -53.57,
+    -287.66,
+    -39.31
+   ],
+   "direction": [
+    -0.7262,
+    0.1375,
+    -0.6736
+   ],
+   "length_mm": 12.1,
+   "radius_mm": 1.83,
+   "depth_mm": 335.1,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "RMB",
+    "BI",
+    "RLL",
+    "RB_TRUNK",
+    "RB10",
+    "RB10c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Right main bronchus",
+    "Bronchus intermedius",
+    "Right lower lobe bronchus",
+    "Right basal trunk",
+    "Posterior basal segment",
+    "Subsegment RB10c"
+   ]
+  },
+  {
+   "id": "LMB",
+   "label": "LMB",
+   "name": "Left main bronchus",
+   "level": "lobar",
+   "parent": "TRACH",
+   "start_mm": [
+    0.0,
+    -245.0,
+    0.0
+   ],
+   "position_mm": [
+    20.28,
+    -281.37,
+    5.44
+   ],
+   "direction": [
+    0.483,
+    -0.866,
+    0.1294
+   ],
+   "length_mm": 42.0,
+   "radius_mm": 6.0,
+   "depth_mm": 287.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus"
+   ]
+  },
+  {
+   "id": "LUL",
+   "label": "LUL",
+   "name": "Left upper lobe bronchus",
+   "level": "lobar",
+   "parent": "LMB",
+   "start_mm": [
+    20.28,
+    -281.37,
+    5.44
+   ],
+   "position_mm": [
+    31.6,
+    -282.07,
+    11.79
+   ],
+   "direction": [
+    0.8706,
+    -0.0533,
+    0.489
+   ],
+   "length_mm": 13.0,
+   "radius_mm": 5.0,
+   "depth_mm": 300.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus"
+   ]
+  },
+  {
+   "id": "LB1+2",
+   "label": "LB1+2",
+   "name": "Apicoposterior segment, left upper lobe",
+   "level": "segmental",
+   "parent": "LUL",
+   "start_mm": [
+    31.6,
+    -282.07,
+    11.79
+   ],
+   "position_mm": [
+    40.73,
+    -275.54,
+    30.72
+   ],
+   "direction": [
+    0.4149,
+    0.2966,
+    0.8602
+   ],
+   "length_mm": 22.0,
+   "radius_mm": 3.5,
+   "depth_mm": 322.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB1+2"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Apicoposterior segment, left upper lobe"
+   ]
+  },
+  {
+   "id": "LB1+2a",
+   "label": "LB1+2a",
+   "name": "Subsegment LB1+2a",
+   "level": "subsegmental",
+   "parent": "LB1+2",
+   "start_mm": [
+    40.73,
+    -275.54,
+    30.72
+   ],
+   "position_mm": [
+    51.88,
+    -266.3,
+    38.34
+   ],
+   "direction": [
+    0.6813,
+    0.5647,
+    0.4657
+   ],
+   "length_mm": 16.37,
+   "radius_mm": 2.24,
+   "depth_mm": 338.4,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB1+2",
+    "LB1+2a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Apicoposterior segment, left upper lobe",
+    "Subsegment LB1+2a"
+   ]
+  },
+  {
+   "id": "LB1+2b",
+   "label": "LB1+2b",
+   "name": "Subsegment LB1+2b",
+   "level": "subsegmental",
+   "parent": "LB1+2",
+   "start_mm": [
+    40.73,
+    -275.54,
+    30.72
+   ],
+   "position_mm": [
+    40.75,
+    -266.09,
+    45.23
+   ],
+   "direction": [
+    0.0015,
+    0.5459,
+    0.8378
+   ],
+   "length_mm": 17.32,
+   "radius_mm": 2.15,
+   "depth_mm": 339.3,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB1+2",
+    "LB1+2b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Apicoposterior segment, left upper lobe",
+    "Subsegment LB1+2b"
+   ]
+  },
+  {
+   "id": "LB1+2c",
+   "label": "LB1+2c",
+   "name": "Subsegment LB1+2c",
+   "level": "subsegmental",
+   "parent": "LB1+2",
+   "start_mm": [
+    40.73,
+    -275.54,
+    30.72
+   ],
+   "position_mm": [
+    45.25,
+    -277.56,
+    43.1
+   ],
+   "direction": [
+    0.3392,
+    -0.1517,
+    0.9284
+   ],
+   "length_mm": 13.34,
+   "radius_mm": 2.09,
+   "depth_mm": 335.3,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB1+2",
+    "LB1+2c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Apicoposterior segment, left upper lobe",
+    "Subsegment LB1+2c"
+   ]
+  },
+  {
+   "id": "LB3",
+   "label": "LB3",
+   "name": "Anterior segment, left upper lobe",
+   "level": "segmental",
+   "parent": "LUL",
+   "start_mm": [
+    31.6,
+    -282.07,
+    11.79
+   ],
+   "position_mm": [
+    40.79,
+    -281.58,
+    30.67
+   ],
+   "direction": [
+    0.4373,
+    0.0233,
+    0.899
+   ],
+   "length_mm": 21.0,
+   "radius_mm": 3.0,
+   "depth_mm": 321.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB3"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Anterior segment, left upper lobe"
+   ]
+  },
+  {
+   "id": "LB3a",
+   "label": "LB3a",
+   "name": "Subsegment LB3a",
+   "level": "subsegmental",
+   "parent": "LB3",
+   "start_mm": [
+    40.79,
+    -281.58,
+    30.67
+   ],
+   "position_mm": [
+    52.32,
+    -282.16,
+    42.48
+   ],
+   "direction": [
+    0.6985,
+    -0.0351,
+    0.7148
+   ],
+   "length_mm": 16.52,
+   "radius_mm": 1.69,
+   "depth_mm": 337.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB3",
+    "LB3a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Anterior segment, left upper lobe",
+    "Subsegment LB3a"
+   ]
+  },
+  {
+   "id": "LB3b",
+   "label": "LB3b",
+   "name": "Subsegment LB3b",
+   "level": "subsegmental",
+   "parent": "LB3",
+   "start_mm": [
+    40.79,
+    -281.58,
+    30.67
+   ],
+   "position_mm": [
+    43.44,
+    -275.02,
+    41.32
+   ],
+   "direction": [
+    0.2075,
+    0.513,
+    0.833
+   ],
+   "length_mm": 12.79,
+   "radius_mm": 2.04,
+   "depth_mm": 333.8,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB3",
+    "LB3b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Anterior segment, left upper lobe",
+    "Subsegment LB3b"
+   ]
+  },
+  {
+   "id": "LB3c",
+   "label": "LB3c",
+   "name": "Subsegment LB3c",
+   "level": "subsegmental",
+   "parent": "LB3",
+   "start_mm": [
+    40.79,
+    -281.58,
+    30.67
+   ],
+   "position_mm": [
+    44.96,
+    -286.68,
+    41.4
+   ],
+   "direction": [
+    0.3311,
+    -0.4054,
+    0.852
+   ],
+   "length_mm": 12.59,
+   "radius_mm": 1.68,
+   "depth_mm": 333.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LUL",
+    "LB3",
+    "LB3c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left upper lobe bronchus",
+    "Anterior segment, left upper lobe",
+    "Subsegment LB3c"
+   ]
+  },
+  {
+   "id": "LING",
+   "label": "LING",
+   "name": "Lingular bronchus",
+   "level": "lobar",
+   "parent": "LMB",
+   "start_mm": [
+    20.28,
+    -281.37,
+    5.44
+   ],
+   "position_mm": [
+    25.39,
+    -285.57,
+    12.94
+   ],
+   "direction": [
+    0.5108,
+    -0.4195,
+    0.7504
+   ],
+   "length_mm": 10.0,
+   "radius_mm": 4.0,
+   "depth_mm": 297.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus"
+   ]
+  },
+  {
+   "id": "LB4",
+   "label": "LB4",
+   "name": "Superior lingular segment",
+   "level": "segmental",
+   "parent": "LING",
+   "start_mm": [
+    25.39,
+    -285.57,
+    12.94
+   ],
+   "position_mm": [
+    27.5,
+    -286.29,
+    28.78
+   ],
+   "direction": [
+    0.1314,
+    -0.0448,
+    0.9903
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 2.75,
+   "depth_mm": 313.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB4"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Superior lingular segment"
+   ]
+  },
+  {
+   "id": "LB4a",
+   "label": "LB4a",
+   "name": "Subsegment LB4a",
+   "level": "subsegmental",
+   "parent": "LB4",
+   "start_mm": [
+    27.5,
+    -286.29,
+    28.78
+   ],
+   "position_mm": [
+    24.89,
+    -285.67,
+    38.95
+   ],
+   "direction": [
+    -0.2481,
+    0.0584,
+    0.967
+   ],
+   "length_mm": 10.52,
+   "radius_mm": 1.87,
+   "depth_mm": 323.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB4",
+    "LB4a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Superior lingular segment",
+    "Subsegment LB4a"
+   ]
+  },
+  {
+   "id": "LB4b",
+   "label": "LB4b",
+   "name": "Subsegment LB4b",
+   "level": "subsegmental",
+   "parent": "LB4",
+   "start_mm": [
+    27.5,
+    -286.29,
+    28.78
+   ],
+   "position_mm": [
+    30.88,
+    -289.74,
+    38.19
+   ],
+   "direction": [
+    0.3196,
+    -0.3269,
+    0.8894
+   ],
+   "length_mm": 10.58,
+   "radius_mm": 1.9,
+   "depth_mm": 323.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB4",
+    "LB4b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Superior lingular segment",
+    "Subsegment LB4b"
+   ]
+  },
+  {
+   "id": "LB4c",
+   "label": "LB4c",
+   "name": "Subsegment LB4c",
+   "level": "subsegmental",
+   "parent": "LB4",
+   "start_mm": [
+    27.5,
+    -286.29,
+    28.78
+   ],
+   "position_mm": [
+    30.85,
+    -282.44,
+    40.46
+   ],
+   "direction": [
+    0.2631,
+    0.3018,
+    0.9164
+   ],
+   "length_mm": 12.74,
+   "radius_mm": 1.89,
+   "depth_mm": 325.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB4",
+    "LB4c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Superior lingular segment",
+    "Subsegment LB4c"
+   ]
+  },
+  {
+   "id": "LB5",
+   "label": "LB5",
+   "name": "Inferior lingular segment",
+   "level": "segmental",
+   "parent": "LING",
+   "start_mm": [
+    25.39,
+    -285.57,
+    12.94
+   ],
+   "position_mm": [
+    30.28,
+    -281.63,
+    27.66
+   ],
+   "direction": [
+    0.3053,
+    0.2459,
+    0.92
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 2.75,
+   "depth_mm": 313.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB5"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Inferior lingular segment"
+   ]
+  },
+  {
+   "id": "LB5a",
+   "label": "LB5a",
+   "name": "Subsegment LB5a",
+   "level": "subsegmental",
+   "parent": "LB5",
+   "start_mm": [
+    30.28,
+    -281.63,
+    27.66
+   ],
+   "position_mm": [
+    28.06,
+    -277.46,
+    39.23
+   ],
+   "direction": [
+    -0.1775,
+    0.3337,
+    0.9258
+   ],
+   "length_mm": 12.5,
+   "radius_mm": 1.84,
+   "depth_mm": 325.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB5",
+    "LB5a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Inferior lingular segment",
+    "Subsegment LB5a"
+   ]
+  },
+  {
+   "id": "LB5b",
+   "label": "LB5b",
+   "name": "Subsegment LB5b",
+   "level": "subsegmental",
+   "parent": "LB5",
+   "start_mm": [
+    30.28,
+    -281.63,
+    27.66
+   ],
+   "position_mm": [
+    35.48,
+    -282.63,
+    35.37
+   ],
+   "direction": [
+    0.5556,
+    -0.1062,
+    0.8247
+   ],
+   "length_mm": 9.36,
+   "radius_mm": 1.52,
+   "depth_mm": 322.4,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB5",
+    "LB5b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Inferior lingular segment",
+    "Subsegment LB5b"
+   ]
+  },
+  {
+   "id": "LB5c",
+   "label": "LB5c",
+   "name": "Subsegment LB5c",
+   "level": "subsegmental",
+   "parent": "LB5",
+   "start_mm": [
+    30.28,
+    -281.63,
+    27.66
+   ],
+   "position_mm": [
+    33.91,
+    -275.78,
+    34.11
+   ],
+   "direction": [
+    0.3854,
+    0.6201,
+    0.6833
+   ],
+   "length_mm": 9.44,
+   "radius_mm": 1.65,
+   "depth_mm": 322.4,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LING",
+    "LB5",
+    "LB5c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Lingular bronchus",
+    "Inferior lingular segment",
+    "Subsegment LB5c"
+   ]
+  },
+  {
+   "id": "LLL",
+   "label": "LLL",
+   "name": "Left lower lobe bronchus",
+   "level": "lobar",
+   "parent": "LMB",
+   "start_mm": [
+    20.28,
+    -281.37,
+    5.44
+   ],
+   "position_mm": [
+    28.69,
+    -286.51,
+    3.74
+   ],
+   "direction": [
+    0.841,
+    -0.5137,
+    -0.17
+   ],
+   "length_mm": 10.0,
+   "radius_mm": 5.0,
+   "depth_mm": 297.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus"
+   ]
+  },
+  {
+   "id": "LB6",
+   "label": "LB6",
+   "name": "Superior (apical) segment, left lower lobe",
+   "level": "segmental",
+   "parent": "LLL",
+   "start_mm": [
+    28.69,
+    -286.51,
+    3.74
+   ],
+   "position_mm": [
+    40.28,
+    -286.42,
+    -8.71
+   ],
+   "direction": [
+    0.6813,
+    0.0053,
+    -0.732
+   ],
+   "length_mm": 17.0,
+   "radius_mm": 3.25,
+   "depth_mm": 314.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB6"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Superior (apical) segment, left lower lobe"
+   ]
+  },
+  {
+   "id": "LB6a",
+   "label": "LB6a",
+   "name": "Subsegment LB6a",
+   "level": "subsegmental",
+   "parent": "LB6",
+   "start_mm": [
+    40.28,
+    -286.42,
+    -8.71
+   ],
+   "position_mm": [
+    43.17,
+    -285.64,
+    -18.54
+   ],
+   "direction": [
+    0.2817,
+    0.076,
+    -0.9565
+   ],
+   "length_mm": 10.28,
+   "radius_mm": 2.25,
+   "depth_mm": 324.3,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB6",
+    "LB6a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Superior (apical) segment, left lower lobe",
+    "Subsegment LB6a"
+   ]
+  },
+  {
+   "id": "LB6b",
+   "label": "LB6b",
+   "name": "Subsegment LB6b",
+   "level": "subsegmental",
+   "parent": "LB6",
+   "start_mm": [
+    40.28,
+    -286.42,
+    -8.71
+   ],
+   "position_mm": [
+    47.83,
+    -281.15,
+    -14.58
+   ],
+   "direction": [
+    0.6916,
+    0.4823,
+    -0.5377
+   ],
+   "length_mm": 10.92,
+   "radius_mm": 2.19,
+   "depth_mm": 324.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB6",
+    "LB6b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Superior (apical) segment, left lower lobe",
+    "Subsegment LB6b"
+   ]
+  },
+  {
+   "id": "LB6c",
+   "label": "LB6c",
+   "name": "Subsegment LB6c",
+   "level": "subsegmental",
+   "parent": "LB6",
+   "start_mm": [
+    40.28,
+    -286.42,
+    -8.71
+   ],
+   "position_mm": [
+    47.17,
+    -290.55,
+    -14.16
+   ],
+   "direction": [
+    0.7098,
+    -0.4255,
+    -0.5613
+   ],
+   "length_mm": 9.71,
+   "radius_mm": 2.12,
+   "depth_mm": 323.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB6",
+    "LB6c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Superior (apical) segment, left lower lobe",
+    "Subsegment LB6c"
+   ]
+  },
+  {
+   "id": "LB_TRUNK",
+   "label": "LB_TRUNK",
+   "name": "Left basal trunk",
+   "level": "conducting",
+   "parent": "LLL",
+   "start_mm": [
+    28.69,
+    -286.51,
+    3.74
+   ],
+   "position_mm": [
+    41.4,
+    -290.84,
+    -0.24
+   ],
+   "direction": [
+    0.9077,
+    -0.3089,
+    -0.2841
+   ],
+   "length_mm": 14.0,
+   "radius_mm": 4.25,
+   "depth_mm": 311.0,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk"
+   ]
+  },
+  {
+   "id": "LB8",
+   "label": "LB8",
+   "name": "Anteromedial basal segment",
+   "level": "segmental",
+   "parent": "LB_TRUNK",
+   "start_mm": [
+    41.4,
+    -290.84,
+    -0.24
+   ],
+   "position_mm": [
+    57.22,
+    -292.51,
+    1.5
+   ],
+   "direction": [
+    0.9885,
+    -0.1049,
+    0.1086
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 327.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB8"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Anteromedial basal segment"
+   ]
+  },
+  {
+   "id": "LB8a",
+   "label": "LB8a",
+   "name": "Subsegment LB8a",
+   "level": "subsegmental",
+   "parent": "LB8",
+   "start_mm": [
+    57.22,
+    -292.51,
+    1.5
+   ],
+   "position_mm": [
+    69.31,
+    -293.8,
+    -1.8
+   ],
+   "direction": [
+    0.9597,
+    -0.1023,
+    -0.2617
+   ],
+   "length_mm": 12.6,
+   "radius_mm": 1.84,
+   "depth_mm": 339.6,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB8",
+    "LB8a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Anteromedial basal segment",
+    "Subsegment LB8a"
+   ]
+  },
+  {
+   "id": "LB8b",
+   "label": "LB8b",
+   "name": "Subsegment LB8b",
+   "level": "subsegmental",
+   "parent": "LB8",
+   "start_mm": [
+    57.22,
+    -292.51,
+    1.5
+   ],
+   "position_mm": [
+    66.38,
+    -290.7,
+    4.19
+   ],
+   "direction": [
+    0.9424,
+    0.187,
+    0.2772
+   ],
+   "length_mm": 9.72,
+   "radius_mm": 1.97,
+   "depth_mm": 336.7,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB8",
+    "LB8b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Anteromedial basal segment",
+    "Subsegment LB8b"
+   ]
+  },
+  {
+   "id": "LB8c",
+   "label": "LB8c",
+   "name": "Subsegment LB8c",
+   "level": "subsegmental",
+   "parent": "LB8",
+   "start_mm": [
+    57.22,
+    -292.51,
+    1.5
+   ],
+   "position_mm": [
+    66.74,
+    -298.99,
+    5.74
+   ],
+   "direction": [
+    0.7758,
+    -0.528,
+    0.3456
+   ],
+   "length_mm": 12.27,
+   "radius_mm": 1.74,
+   "depth_mm": 339.3,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB8",
+    "LB8c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Anteromedial basal segment",
+    "Subsegment LB8c"
+   ]
+  },
+  {
+   "id": "LB9",
+   "label": "LB9",
+   "name": "Lateral basal segment",
+   "level": "segmental",
+   "parent": "LB_TRUNK",
+   "start_mm": [
+    41.4,
+    -290.84,
+    -0.24
+   ],
+   "position_mm": [
+    55.13,
+    -286.17,
+    -7.0
+   ],
+   "direction": [
+    0.8582,
+    0.2914,
+    -0.4226
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.0,
+   "depth_mm": 327.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB9"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Lateral basal segment"
+   ]
+  },
+  {
+   "id": "LB9a",
+   "label": "LB9a",
+   "name": "Subsegment LB9a",
+   "level": "subsegmental",
+   "parent": "LB9",
+   "start_mm": [
+    55.13,
+    -286.17,
+    -7.0
+   ],
+   "position_mm": [
+    62.73,
+    -284.55,
+    -15.97
+   ],
+   "direction": [
+    0.6405,
+    0.1371,
+    -0.7557
+   ],
+   "length_mm": 11.86,
+   "radius_mm": 1.95,
+   "depth_mm": 338.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB9",
+    "LB9a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Lateral basal segment",
+    "Subsegment LB9a"
+   ]
+  },
+  {
+   "id": "LB9b",
+   "label": "LB9b",
+   "name": "Subsegment LB9b",
+   "level": "subsegmental",
+   "parent": "LB9",
+   "start_mm": [
+    55.13,
+    -286.17,
+    -7.0
+   ],
+   "position_mm": [
+    63.66,
+    -278.48,
+    -10.42
+   ],
+   "direction": [
+    0.7116,
+    0.6421,
+    -0.2852
+   ],
+   "length_mm": 11.98,
+   "radius_mm": 1.83,
+   "depth_mm": 339.0,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB9",
+    "LB9b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Lateral basal segment",
+    "Subsegment LB9b"
+   ]
+  },
+  {
+   "id": "LB9c",
+   "label": "LB9c",
+   "name": "Subsegment LB9c",
+   "level": "subsegmental",
+   "parent": "LB9",
+   "start_mm": [
+    55.13,
+    -286.17,
+    -7.0
+   ],
+   "position_mm": [
+    65.44,
+    -286.34,
+    -10.27
+   ],
+   "direction": [
+    0.9533,
+    -0.0155,
+    -0.3016
+   ],
+   "length_mm": 10.81,
+   "radius_mm": 1.98,
+   "depth_mm": 337.8,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB9",
+    "LB9c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Lateral basal segment",
+    "Subsegment LB9c"
+   ]
+  },
+  {
+   "id": "LB10",
+   "label": "LB10",
+   "name": "Posterior basal segment",
+   "level": "segmental",
+   "parent": "LB_TRUNK",
+   "start_mm": [
+    41.4,
+    -290.84,
+    -0.24
+   ],
+   "position_mm": [
+    52.51,
+    -291.55,
+    -11.74
+   ],
+   "direction": [
+    0.6942,
+    -0.0448,
+    -0.7184
+   ],
+   "length_mm": 16.0,
+   "radius_mm": 3.25,
+   "depth_mm": 327.0,
+   "scored": true,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB10"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Posterior basal segment"
+   ]
+  },
+  {
+   "id": "LB10a",
+   "label": "LB10a",
+   "name": "Subsegment LB10a",
+   "level": "subsegmental",
+   "parent": "LB10",
+   "start_mm": [
+    52.51,
+    -291.55,
+    -11.74
+   ],
+   "position_mm": [
+    56.13,
+    -291.74,
+    -20.99
+   ],
+   "direction": [
+    0.3645,
+    -0.0184,
+    -0.931
+   ],
+   "length_mm": 9.94,
+   "radius_mm": 2.04,
+   "depth_mm": 336.9,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB10",
+    "LB10a"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Posterior basal segment",
+    "Subsegment LB10a"
+   ]
+  },
+  {
+   "id": "LB10b",
+   "label": "LB10b",
+   "name": "Subsegment LB10b",
+   "level": "subsegmental",
+   "parent": "LB10",
+   "start_mm": [
+    52.51,
+    -291.55,
+    -11.74
+   ],
+   "position_mm": [
+    61.53,
+    -288.13,
+    -16.01
+   ],
+   "direction": [
+    0.8548,
+    0.3244,
+    -0.405
+   ],
+   "length_mm": 10.55,
+   "radius_mm": 2.26,
+   "depth_mm": 337.5,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB10",
+    "LB10b"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Posterior basal segment",
+    "Subsegment LB10b"
+   ]
+  },
+  {
+   "id": "LB10c",
+   "label": "LB10c",
+   "name": "Subsegment LB10c",
+   "level": "subsegmental",
+   "parent": "LB10",
+   "start_mm": [
+    52.51,
+    -291.55,
+    -11.74
+   ],
+   "position_mm": [
+    59.5,
+    -295.23,
+    -16.28
+   ],
+   "direction": [
+    0.7673,
+    -0.4036,
+    -0.4984
+   ],
+   "length_mm": 9.11,
+   "radius_mm": 2.18,
+   "depth_mm": 336.1,
+   "scored": false,
+   "landmark": null,
+   "path": [
+    "ENTRY",
+    "TRACH",
+    "LMB",
+    "LLL",
+    "LB_TRUNK",
+    "LB10",
+    "LB10c"
+   ],
+   "path_names": [
+    "Oral route (incisors to vocal cords)",
+    "Trachea",
+    "Left main bronchus",
+    "Left lower lobe bronchus",
+    "Left basal trunk",
+    "Posterior basal segment",
+    "Subsegment LB10c"
+   ]
+  }
+ ]
+}
