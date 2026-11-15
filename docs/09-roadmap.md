@@ -106,6 +106,16 @@ validation as the synthetic one; a clinician confirms all 18 labels.
 - Console/mobile/Windows builds
 - Any validity claim beyond "practice tool"
 
+## Why eight cases, and what a summative claim would need
+
+Generalizability data from a 12-case bronchoscopy test show **6 cases** support
+formative reliability > 0.7 and **10 cases** support summative reliability > 0.8
+(PMID [41963810](https://pubmed.ncbi.nlm.nih.gov/41963810/)). Eight cases is
+therefore a *formative* set. If an exam/credentialing claim is ever wanted, the
+package needs at least 10 comparable-difficulty cases, fixed test conditions and a
+contrasting-groups standard-setting exercise — a separate project, not a v1
+feature.
+
 ## Validation study (post-M6)
 
 A small prospective study — resident cohort, mastery criteria, DC/SP measured in

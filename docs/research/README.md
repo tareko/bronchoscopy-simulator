@@ -8,6 +8,7 @@ the citations and caveats behind the decisions in the parent docs.
 | [clinical-evidence.md](clinical-evidence.md) | Does simulation work, which skills and metrics have validity, how to teach, what realism is required | ~8.4k |
 | [prior-art.md](prior-art.md) | What commercial/academic/open-source simulators exist, what to copy, what is missing | ~9.3k |
 | [linux-vr-stack.md](linux-vr-stack.md) | Which runtime, engine, performance budget, anatomy licences, reusable code | ~7k |
+| [evidence-supplement-2026.md](evidence-supplement-2026.md) | Later 2026 findings found via SearXNG/Europe PMC; sharpens the HMD-equivalence claim and the case-count requirement | short |
 
 Reading order for a new contributor: clinical-evidence → prior-art → stack, then
 the decision summaries in `docs/01`, `docs/08` and `docs/07`.

@@ -88,7 +88,16 @@ declare:
 ```
 
 A session passes only when every criterion holds; the debrief shows which failed
-and by how much. This mirrors the proficiency-based progression studies, and it
+and by how much.
+
+**Where the numbers come from.** A mastery threshold should be set by
+contrasting-groups standard setting, not chosen for tidiness. The only published
+bronchoscopy-simulator pass mark is **34.4%** (contrasting groups, 15 novices vs
+15 experienced, PMID
+[41963810](https://pubmed.ncbi.nlm.nih.gov/41963810/)); a 75% composite is
+arbitrary until we have our own data. That study also shows reliability needs
+**6 cases** for formative and **10** for summative assessment, which constrains
+how many cases a "test" mode must present. This mirrors the proficiency-based progression studies, and it
 gives a trainee a reason to repeat a case rather than scrape through.
 
 ## Debrief contents

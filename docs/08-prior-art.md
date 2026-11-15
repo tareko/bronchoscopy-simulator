@@ -38,8 +38,12 @@ proxy scope, not better graphics.
    inspection → sampling → haemorrhage management, with a summative test.
 4. **ORSIM's lesson:** the cheapest-looking device (passive replica, no force
    feedback) owns the only patient-outcome RCT and a 12-case summative
-   examination with a 34.4% pass mark. Haptics are an unproven active
-   ingredient; assessment design is not.
+   examination with a 34.4% pass mark, now published in full: 15 novices vs 15
+   experts, α = 0.89, all five Messick sources (PMID
+   [41963810](https://pubmed.ncbi.nlm.nih.gov/41963810/)). Haptics are an
+   unproven active ingredient; assessment design is not. Note the marketing
+   convention: this is called a "portable VR simulator" although it is a laptop,
+   a sensor box and a video scope — not a headset.
 5. **Reusable software:** `github.com/andreajonas/bronchsimulator` — BronchSim
    (Stanford, CC BY 4.0) is a working browser trainer with a CT-derived
    watertight airway surface, 3D Slicer/VMTK centreline extraction, branch tree,
@@ -58,6 +62,10 @@ proxy scope, not better graphics.
   humble about it).
 - **Open source, Linux, OpenXR, offline.** There is no open-source VR
   bronchoscopy trainer, and Steam returns zero results for bronchoscopy.
+- **Low-cost validation is no longer a gap in the literature** (an INR 1,000
+  model has published validity, PMID
+  [42124767](https://pubmed.ncbi.nlm.nih.gov/42124767/)) — but no one ships an
+  open, hardware-agnostic implementation.
 - **Data export** for educators and researchers, which closed platforms do not
   offer.
 

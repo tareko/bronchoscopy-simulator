@@ -74,11 +74,27 @@ cases as the roadmap item that matters most (see docs/06).
   Cochrane 2025 found insufficient evidence to replace conventional training.
 - Simulator scores correlate only weakly with real-patient performance
   (r ≈ 0.24, CI −0.02–0.47).
-- **No HMD-based bronchoscopy validity evidence exists.** The validated
-  archetype is a screen + instrumented scope, not a headset + wand controllers.
-  This project inherits no validity from that literature; it has to generate its
-  own. Hence the metrics export: every session is a dataset row, and a
-  validation study is a stated goal, not a marketing line.
+- **No HMD-based bronchoscopy validity evidence exists.** The strongest evidence
+  in the field belongs to a *portable screen-based* system: a 2026 validation
+  study of a "portable virtual reality flexible bronchoscopy simulator"
+  (PMID [41963810](https://pubmed.ncbi.nlm.nih.gov/41963810/)) reports
+  Cronbach's α = 0.89, a 34.4% contrasting-groups pass mark and expert-novice
+  discrimination across all five Messick sources — but the device is a video
+  scope, sensor unit and **laptop**, not a headset. This project inherits no
+  validity from that literature; it has to generate its own. Hence the metrics
+  export: every session is a dataset row, and a validation study is a stated
+  goal, not a marketing line.
+
+- **Case count is a statistical requirement.** The same study found 6 cases give
+  formative reliability > 0.7 and **10 cases > 0.8 for a summative test**. Our
+  eight-case set is therefore formative; see docs/09 for what a summative claim
+  would need.
+
+- **Cheap can carry validity.** A paediatric airway model built for INR 1,000
+  (≈ US$12) from local materials showed face, content, curriculum and transfer
+  validity with 26 residents (PMID
+  [42124767](https://pubmed.ncbi.nlm.nih.gov/42124767/)). Fidelity theatre is not
+  where the evidence is.
 - Our generated insertion depths are **model-derived, not normative**. No
   reliable table of "cm from the incisors" by segment could be located; the
   literature gives means with wide spread. Do not present them as standards.
@@ -105,6 +121,9 @@ benefit. Nothing in this project claims more than that.
 5. Haptics are optional (force feedback has no proven effect); wall-contact
    counting plus a scope-shaped controller matters more. This is why v1 is
    controller-only and phase 2 adds a tracked prop, not a force-feedback rig.
+6. Set the pass mark by **contrasting groups**, not by a round number: the only
+   published bronchoscopy-simulator standard is 34.4%. Fixed thresholds (75/100)
+   are arbitrary until we have our own contrasting-groups data.
 6. Log everything, forever — path, collisions, suction time, tool use, dwell
    per segment — because the future validation study needs it and cannot be
    reconstructed afterwards.
