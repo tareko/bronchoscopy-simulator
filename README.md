@@ -67,6 +67,8 @@ navigates to the right lower lobe's superior segment (RB6).
 | Procedural airway mesh (runtime, no binary assets) | working |
 | Session event log, metrics, rubric scoring, JSON/CSV export | working |
 | Desktop preview mode + keyboard control | working |
+| 3D-printable scope prop: spring lever, AS5600, Tracker shoe | designed (STLs committed) |
+| Lever mapping (deadzone/invert/expo) with tests | working |
 | OpenXR/Vive controller input, haptics | next |
 | Eight cases, guidance/minimap, debrief UI | next |
 | CT → airway pipeline (3D Slicer + TotalSegmentator) | designed, not implemented |
@@ -81,6 +83,7 @@ src/anatomy/           airway_tree.gd (graph + queries), airway_mesh_builder.gd
 src/scope/             endoscope.gd (lever/torque/insertion kinematics)
 src/metrics/           procedure_log.gd (event sourcing, rubric, export)
 src/main.gd            desktop entry point and VR bootstrap
+hardware/prop/         printable scope prop: OpenSCAD source, STLs, firmware, BOM
 tests/run_tests.gd     dependency-free headless suite
 tools/gen_anatomy/     procedural airway generator
 tools/ct_pipeline/     DICOM → airway graph (designed; see docs/06)
@@ -98,6 +101,14 @@ tools/ct_pipeline/     DICOM → airway graph (designed; see docs/06)
 - [Linux VR setup and performance](docs/07-vr-linux-setup.md)
 - [Prior art: commercial, academic and open-source](docs/08-prior-art.md)
 - [Roadmap](docs/09-roadmap.md)
+
+## Hardware
+
+A printable bronchoscope prop (spring-centred lever + Vive Tracker shoe, ~€30 of
+parts plus a Tracker) lives in [`hardware/prop/`](hardware/prop/README.md) with a
+parametric OpenSCAD source, committed STLs, an RP2040/AS5600 firmware sketch and
+a printability validator. The evidence for why a physical handle matters more
+than force feedback is in [docs/08](docs/08-prior-art.md).
 
 ## Contributing
 

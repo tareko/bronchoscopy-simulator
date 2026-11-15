@@ -10,6 +10,7 @@ extends SceneTree
 const AirwayTreeScript := preload("res://src/anatomy/airway_tree.gd")
 const EndoscopeScript := preload("res://src/scope/endoscope.gd")
 const ProcedureLogScript := preload("res://src/metrics/procedure_log.gd")
+const LeverMapperScript := preload("res://src/scope/lever_mapper.gd")
 
 const TREE_PATH := "res://assets/anatomy/generic_adult.json"
 
@@ -29,6 +30,7 @@ func _initialize() -> void:
 	_test_scope_blocks_on_narrow_airway()
 	_test_metrics_and_export()
 	_test_evidence_metrics()
+	_test_lever_mapper()
 	_test_scripted_run()
 
 	print("")
@@ -243,6 +245,29 @@ func _test_evidence_metrics() -> void:
 	})
 	_check(int(alt_metrics["structured_progress"]) == 5,
 		"a valid alternative order should score 5 progressions, got %s" % alt_metrics["structured_progress"])
+
+
+func _test_lever_mapper() -> void:
+	_begin("physical lever mapping")
+	var mapper = LeverMapperScript.new()
+	_check(is_zero_approx(mapper.map_axis(0.0)), "centred lever must read exactly 0")
+	_check(is_zero_approx(mapper.map_axis(0.02)), "inside the deadzone must read 0")
+	_check(absf(mapper.map_axis(1.0) - 1.0) < 0.001, "full travel must read 1")
+	_check(absf(mapper.map_axis(-1.0) + 1.0) < 0.001, "full travel the other way must read -1")
+	_check(absf(mapper.map_axis(2.5) - 1.0) < 0.001, "out-of-range input must clamp")
+	var mid: float = mapper.map_axis(0.5)
+	_check(mid > 0.4 and mid < 0.5, "half travel should stay close to 0.48, got %.3f" % mid)
+	mapper.invert = true
+	_check(mapper.map_axis(0.5) < 0.0, "invert must flip the sign")
+	mapper.invert = false
+	mapper.expo = 2.0
+	_check(mapper.map_axis(0.5) < mid, "expo > 1 must soften mid travel")
+	# calibrated encoder path: 2048 centre, 900 half span (fresh mapper, no expo)
+	var flat = LeverMapperScript.new()
+	var mapped: float = flat.map_angle(2048 + 450, 2048, 900)
+	_check(mapped > 0.4 and mapped < 0.6, "half-deflected encoder should read ~0.48, got %.3f" % mapped)
+	_check(is_zero_approx(flat.map_angle(2048, 2048, 900)), "encoder at centre must read 0")
+	_check(is_zero_approx(flat.map_angle(2048 + 450, 2048, 0)), "uncalibrated encoder must read 0")
 
 
 func _test_scripted_run() -> void:

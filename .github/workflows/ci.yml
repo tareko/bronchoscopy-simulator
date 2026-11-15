@@ -37,6 +37,9 @@ jobs:
             --out assets/anatomy/generic_adult.json
           git diff --exit-code assets/anatomy/generic_adult.json
 
+      - name: Validate prop STLs (watertight, single body, printable)
+        run: python3 hardware/prop/validate_stl.py hardware/prop/stl
+
       - name: Import project
         run: ./godot --headless --path . --editor --quit
 

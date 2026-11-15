@@ -46,3 +46,6 @@ reports/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Godot import sidecars for documentation images
+hardware/prop/*.import

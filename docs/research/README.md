@@ -13,6 +13,10 @@ the citations and caveats behind the decisions in the parent docs.
 Reading order for a new contributor: clinical-evidence → prior-art → stack, then
 the decision summaries in `docs/01`, `docs/08` and `docs/07`.
 
+[`archive/`](archive/) holds earlier drafts from local-model research runs. They
+are kept for provenance only; the files above supersede them and several claims
+in them are known to be wrong (see the archive's README).
+
 **Caveats carried forward:** the literature is small and dominated by
 anaesthesia fibreoptic intubation; no HMD bronchoscopy validity study exists; no
 simulator has been shown to change patient outcomes. Vendor claims here are

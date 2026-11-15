@@ -14,6 +14,8 @@ Order is chosen so the riskiest assumptions fail early.
 
 ## M1 — VR interaction (next)
 
+- [x] Printed scope prop designed: lever + AS5600 + Tracker shoe (`hardware/prop`)
+- [ ] Build and dry-fit the printed prop; measure the real lever throw
 - [ ] OpenXR action map with `/interaction_profiles/htc/vive_controller` bindings
 - [ ] Ratchet insertion mapping on grip; trackpad lever; wrist-rotation torque
 - [ ] Controller rumble proportional to wall contact
