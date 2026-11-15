@@ -211,9 +211,13 @@ func _test_evidence_metrics() -> void:
 	var log = ProcedureLogScript.new()
 	log.start("test.dc", tree.name, "", order)
 	# RB1 -> RB2 -> RB3 (two correct progressions), skip to RB5 -> RB6
-	# (one more), then jump to LB1+2 (not consecutive).
-	for label in ["RB1", "RB2", "RB3", "RB5", "RB6", "LB1+2"]:
+	# (one more), then jump to LB1+2 (not consecutive), then re-inspect RB2.
+	for label in ["RB1", "RB2", "RB3", "RB5", "RB6", "LB1+2", "RB2"]:
 		log.enter_segment(label)
+	# four seconds of frame time, mostly mid-lumen
+	for i in 4:
+		log.track_frame(1.0, {"centrality": 0.9})
+	log.track_frame(1.0, {"centrality": 0.1})
 	log.finish()
 
 	var metrics: Dictionary = log.compute({"target_segments": order})
@@ -222,7 +226,23 @@ func _test_evidence_metrics() -> void:
 	_check(int(metrics["structured_progress"]) == 3,
 		"SP should count 3 correct progressions, got %s" % metrics["structured_progress"])
 	_check(int(metrics["diagnostic_completeness_max"]) == 18, "DC denominator should be 18")
-	_check(float(metrics["average_intersegmental_time_s"]) >= 0.0, "AIT must be non-negative")
+	_check(int(metrics["segments_revisited"]) == 1, "one segment was revisited, got %s" % metrics["segments_revisited"])
+	_check(int(metrics["revisit_events"]) == 1, "one extra entry, got %s" % metrics["revisit_events"])
+	# MIT is PT/DC: 5 s over 6 inspected segments.
+	_check(absf(float(metrics["mean_intersegmental_time_s"]) - (5.0 / 6.0)) < 0.02,
+		"MIT should be PT/DC = 0.83 s, got %.2f" % metrics["mean_intersegmental_time_s"])
+	_check(absf(float(metrics["mid_lumen_fraction"]) - 0.8) < 0.02,
+		"mid-lumen fraction should be 4/5, got %.2f" % metrics["mid_lumen_fraction"])
+
+	# Some cases accept more than one valid inspection order; scoring only the
+	# canonical route produces false negatives for experts (Sun 2026).
+	var alt_order: Array[String] = ["RB1", "RB2", "RB3", "RB5", "RB6", "LB1+2"]
+	var alt_metrics: Dictionary = log.compute({
+		"target_segments": order,
+		"inspection_order": alt_order,
+	})
+	_check(int(alt_metrics["structured_progress"]) == 5,
+		"a valid alternative order should score 5 progressions, got %s" % alt_metrics["structured_progress"])
 
 
 func _test_scripted_run() -> void:
@@ -249,6 +269,14 @@ func _test_scripted_run() -> void:
 			reached = true
 			log.record_task_completed("reach_rb6")
 			break
+		var current: String = scope.get_current_label()
+		if not current.is_empty() and current != target \
+				and not tree.is_descendant_of(target, current):
+			# Wandered into a branch that cannot lead to the target: back out
+			# rather than pressing on. (RUL is the easy way to do this.)
+			var back_out: Dictionary = scope.advance(-20.0, 0.0, 0.0, 1.0 / 90.0)
+			log.track_frame(0.0, back_out)
+			continue
 		if bool(report.get("blocked", false)):
 			stuck += 1
 			if stuck >= 3:
@@ -290,7 +318,12 @@ func _autopilot_command(tree, scope, target: String) -> Dictionary:
 	var target_axis: Vector3 = desired_axis * sign
 	var roll_err: float = rad_to_deg(scope.bend_axis.signed_angle_to(target_axis, forward))
 	var lever: float = sign * clampf(forward.angle_to(to_look) / deg_to_rad(scope.max_deflection_deg), -1.0, 1.0)
+	# Keep pushing at a steady hand speed; the steering loop plus wrong-branch
+	# recovery is enough on this anatomy. (Gating insertion on alignment made
+	# the tip dwell at the carina and drift into the upper lobe instead.)
+	var insert := 1.2
 	return {
+		"insert": insert,
 		"lever": lever,
 		"roll": clampf(roll_err, -25.0, 25.0),
 	}

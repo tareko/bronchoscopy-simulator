@@ -17,6 +17,11 @@ instruments a real handle:
 | **Smiloscopy** | your own single-use scope plus tracking sensors |
 | Kyoto Kagaku | physical airway model, no VR |
 
+None of them is headset-first either: ORSIM is a laptop plus sensor box and a
+replica scope, CAE EndoVR is a cart, BRONCH Mentor is a panel and scopes. Their
+fidelity comes from the physical scope interface, not the display. And **every
+commercial product ships on Windows only** — no Linux, from any vendor.
+
 Our wand-controller v1 is therefore the field's outlier. That is a deliberate
 trade (cheap, portable, no proprietary hardware) but it means we cannot borrow
 their interaction model — and the highest-value hardware addition is a tracked
@@ -35,9 +40,13 @@ proxy scope, not better graphics.
    feedback) owns the only patient-outcome RCT and a 12-case summative
    examination with a 34.4% pass mark. Haptics are an unproven active
    ingredient; assessment design is not.
-5. **Reusable software:** BronchSim (browser, CT-derived, CC BY 4.0) and
-   Fraxinus (BSD-3, CT → centreline route → virtual bronchoscopy + EBUS,
-   Ubuntu-first) — Fraxinus is the pipeline to study for the CT phase.
+5. **Reusable software:** `github.com/andreajonas/bronchsimulator` — BronchSim
+   (Stanford, CC BY 4.0) is a working browser trainer with a CT-derived
+   watertight airway surface, 3D Slicer/VMTK centreline extraction, branch tree,
+   base64 glTF, Three.js, joystick plus schematic map and quiz mode. **Read its
+   pipeline before writing our CT importer**; it is the most reusable artefact
+   in this space. Fraxinus (BSD-3) covers CT → route → virtual bronchoscopy plus
+   EBUS.
 
 ## Where the open corners are
 

@@ -40,6 +40,9 @@ var segment_order: Array[String] = []
 ## Scored segments entered, in order, one entry per transition.
 var _segment_sequence: Array[String] = []
 var _segment_first_s: Dictionary = {}   # label -> first entry time
+var _segment_visits: Dictionary = {}    # label -> number of entries
+var _mid_lumen_s := 0.0
+var _timed_s := 0.0
 
 
 func start(p_case_id: String, p_airway: String, p_learner := "",
@@ -64,6 +67,9 @@ func start(p_case_id: String, p_airway: String, p_learner := "",
 	_finished = false
 	_segment_sequence.clear()
 	_segment_first_s.clear()
+	_segment_visits.clear()
+	_mid_lumen_s = 0.0
+	_timed_s = 0.0
 	_append("session_start", {"case_id": case_id, "airway": airway_name, "learner": learner_id})
 
 
@@ -95,11 +101,20 @@ func track_frame(delta_s: float, report: Dictionary) -> void:
 	if not label.is_empty():
 		_segments[label] = float(_segments.get(label, 0.0)) + maxf(delta_s, 0.0)
 
+	# Mid-lumen time: proportion of the procedure with the tip in the central
+	# half of the lumen. Cheap proxy for scope control used in the BRONCH
+	# Mentor validity work (Pastis) and available on every frame.
+	if report.has("centrality"):
+		_timed_s += maxf(delta_s, 0.0)
+		if float(report["centrality"]) >= 0.5:
+			_mid_lumen_s += maxf(delta_s, 0.0)
+
 
 func _on_segment_change(label: String) -> void:
 	# Diagnostic completeness counts named bronchopulmonary segments only.
 	if segment_order.has(label):
 		_segment_sequence.append(label)
+		_segment_visits[label] = int(_segment_visits.get(label, 0)) + 1
 		if not _segment_first_s.has(label):
 			_segment_first_s[label] = _sim_time_s
 	var dwell := _sim_time_s - _label_entered_at
@@ -210,12 +225,18 @@ func segment_total() -> int:
 
 
 ## Structured progress: how many times inspection advanced to the *next*
-## segment in canonical order. Rewards a systematic sweep, not random poking.
-func structured_progress() -> int:
+## segment in the given order. Rewards a systematic sweep, not random poking.
+##
+## Pass a case-specific `order` when more than one inspection sequence is
+## clinically valid. Scoring only one canonical route produces false negatives
+## for experts who take an equally valid path (Sun 2026) — cases should declare
+## their accepted orders rather than rely on Boyden order alone.
+func structured_progress(order: Array[String] = []) -> int:
+	var sequence := order if not order.is_empty() else segment_order
 	var progressions := 0
 	var previous := -1
 	for label in _segment_sequence:
-		var index := segment_order.find(label)
+		var index := sequence.find(label)
 		if index < 0:
 			continue
 		if previous >= 0 and index == previous + 1:
@@ -224,8 +245,42 @@ func structured_progress() -> int:
 	return progressions
 
 
-## Average intersegmental time: mean seconds between first entries of distinct
-## segments. Independent of how many segments the case asks for.
+## Mean intersegmental time as validated: procedure time divided by diagnostic
+## completeness (PT / DC). This is the definition used in the simulator
+## literature, and it is what should be reported as AIT/MIT.
+func mean_intersegmental_time_s() -> float:
+	var dc := diagnostic_completeness()
+	if dc <= 0:
+		return 0.0
+	return _sim_time_s / float(dc)
+
+
+## Segments entered more than once: wasted motion, or legitimate re-inspection.
+## Reported, not punished — some cases require returning to a bleeding site.
+func segments_revisited() -> int:
+	var revisited := 0
+	for count in _segment_visits.values():
+		if int(count) > 1:
+			revisited += 1
+	return revisited
+
+
+func revisit_events() -> int:
+	var extra := 0
+	for count in _segment_visits.values():
+		extra += maxi(int(count) - 1, 0)
+	return extra
+
+
+## Fraction of procedure time with the tip in the central half of the lumen.
+func mid_lumen_fraction() -> float:
+	if _timed_s <= 0.0001:
+		return 0.0
+	return clampf(_mid_lumen_s / _timed_s, 0.0, 1.0)
+
+
+## Timestamp-based intersegmental time: mean seconds between first entries of
+## distinct segments. Kept alongside the PT/DC definition for fluency analysis.
 func average_intersegmental_time_s() -> float:
 	if _segment_first_s.size() < 2:
 		return 0.0
@@ -269,7 +324,11 @@ func compute(rubric: Dictionary = {}) -> Dictionary:
 	var dc := diagnostic_completeness()
 	var dc_max := segment_total()
 	var coverage_rate := coverage(targets) if not targets.is_empty() else float(dc) / float(dc_max)
-	var sp := structured_progress()
+	# Rubric data arrives untagged from JSON; convert before the typed call.
+	var sp_order: Array[String] = []
+	for entry in rubric.get("inspection_order", []):
+		sp_order.append(str(entry))
+	var sp := structured_progress(sp_order)
 	var sp_rate := clampf(float(sp) / float(maxi(dc_max - 1, 1)), 0.0, 1.0)
 	var efficiency := path_economy()
 	# Contact penalty: 40 wall contacts per procedure is a rough ceiling for a
@@ -301,6 +360,10 @@ func compute(rubric: Dictionary = {}) -> Dictionary:
 		"structured_progress": sp,
 		"structured_progress_max": maxi(dc_max - 1, 1),
 		"average_intersegmental_time_s": snappedf(average_intersegmental_time_s(), 0.01),
+		"mean_intersegmental_time_s": snappedf(mean_intersegmental_time_s(), 0.01),
+		"segments_revisited": segments_revisited(),
+		"revisit_events": revisit_events(),
+		"mid_lumen_fraction": snappedf(mid_lumen_fraction(), 0.001),
 		"wall_contacts": _contact_events,
 		"wall_contact_mm": snappedf(_contact_mm, 0.1),
 		"segments_visited": segments_visited(),

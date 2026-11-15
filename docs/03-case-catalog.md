@@ -17,7 +17,10 @@ Common structure:
   "pathology": [ { "kind": "bleeding", "label": "RB8", "severity": 0.7 } ],
   "tasks": [ { "id": "locate_bleed", "label": "RB8", "time_limit_s": 120 } ],
   "success": { "tasks_total": 4, "target_segments": ["RB8"], "mastery_score": 75 },
-  "rubric": { "weights": { "tasks": 0.35, "sp": 0.2, "coverage": 0.2, "safety": 0.25 } }
+  "rubric": {
+    "weights": { "tasks": 0.35, "sp": 0.2, "coverage": 0.2, "safety": 0.25 },
+    "inspection_order": ["RB6", "RB8", "RB9", "RB10"]
+  }
 }
 ```
 

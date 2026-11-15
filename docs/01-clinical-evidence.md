@@ -13,8 +13,15 @@ structured progress of 15.0 ± 5.3 versus 15.5 ± 4.5 with **no feedback at all*
 (p = 1.00), while a human tutor reached 18 ± 0 (p = 0.026 vs guidance).
 [PMID 40494327](https://pubmed.ncbi.nlm.nih.gov/40494327/)
 
+A second study explains the failure mode: scoring "proximity to a pre-defined
+pathway" gives false negatives for experts who take an equally valid route and
+false positives for novices who game the path (Sun 2026, *BMC Anesthesiol*).
+
 **Consequence:** the simulator is a *debriefing instrument*, not an
-arrow-follower. Guidance is limited to orientation support (where am I, what am
+arrow-follower, and scoring must accept **multiple valid inspection orders**
+rather than one canonical route. Cases declare their accepted orders
+(`inspection_order`), and the debrief reports decision quality, not path
+obedience. Guidance is limited to orientation support (where am I, what am
 I looking at), and the teaching value lives in the after-action report. This
 killed the planned "ghost path / waypoint arrow" as a primary feature.
 
@@ -27,6 +34,8 @@ killed the planned "ghost path / waypoint arrow" as a primary feature.
 | **PT** — procedure time | total seconds | used as primary outcome in 2026 RCTs |
 | **AIT** — average intersegmental time | mean seconds between first entries | r = −0.52 with SP |
 | Wall contacts | collisions with airway wall | validated as a skill marker |
+| Mid-lumen time | share of time in the central half of the lumen | used as a control metric in the BRONCH Mentor validity work (Pastis) |
+| Segments revisited | repeat entries | reported alongside DC/SP |
 
 Source: [PMID 33282381](https://pubmed.ncbi.nlm.nih.gov/33282381/) (Cold 2020),
 adopted as primary outcomes by the Naik 2026 and Deng 2026 RCTs.

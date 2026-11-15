@@ -87,6 +87,7 @@ func advance(insert_mm: float, lever := 0.0, roll_deg := 0.0, dt := 1.0 / 90.0) 
 		"depth_mm": get_insertion_depth_mm(),
 		"tip": get_tip(),
 		"tip_dir": tip_dir,
+		"centrality": _tip_centrality(),
 	}
 	if tree == null or path.is_empty():
 		return report
@@ -117,6 +118,7 @@ func advance(insert_mm: float, lever := 0.0, roll_deg := 0.0, dt := 1.0 / 90.0) 
 	report["depth_mm"] = get_insertion_depth_mm()
 	report["tip"] = get_tip()
 	report["tip_dir"] = tip_dir
+	report["centrality"] = _tip_centrality()
 	return report
 
 
@@ -277,6 +279,15 @@ func get_current_label() -> String:
 	if tree == null or path.is_empty():
 		return ""
 	return tree.label_for_point(get_tip())
+
+
+## How centred the tip is in the lumen: 1 on the axis, 0 at the wall.
+func _tip_centrality() -> float:
+	var hit := tree.nearest_on_centerline(get_tip())
+	if hit.is_empty():
+		return 1.0
+	var radius: float = maxf(float(hit["radius_mm"]), 0.001)
+	return clampf(1.0 - float(hit["radial_mm"]) / radius, 0.0, 1.0)
 
 
 ## Clearance to the wall at the tip in mm; negative means penetration.

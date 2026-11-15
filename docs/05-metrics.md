@@ -34,9 +34,15 @@ derived from that log on demand. Consequences:
 | **DC** — diagnostic completeness | distinct numbered segments inspected / 18 | `_segment_first_s.size()` in canonical order |
 | **SP** — structured progress | transitions to the *next* segment in canonical order (max 17) | `structured_progress()` |
 | **PT** — procedure time | seconds from start to finish | `elapsed_s()` |
-| **AIT** — average intersegmental time | mean seconds between first entries of distinct segments | `average_intersegmental_time_s()` |
+| **MIT** — mean intersegmental time | **PT ÷ DC** (the validated definition), reported as the headline fluency number | `mean_intersegmental_time_s()` |
+| **Segments revisited** | segments entered more than once; reported, not punished | `segments_revisited()`, `revisit_events()` |
+| **Mid-lumen fraction** | share of procedure time with the tip in the central half of the lumen | `mid_lumen_fraction()` |
 | **Wall contacts** | count of frames where the tip was clamped by the wall | `_contact_events` |
 | **Path economy** | max depth ÷ total travel (1.0 = no backtracking) | `path_economy()` |
+
+A timestamp-based intersegmental time (`average_intersegmental_time_s()`) is
+also logged, for fluency analysis that is independent of DC. The PT/DC
+definition is the one to report as MIT.
 
 Rationale and citations: [docs/01-clinical-evidence.md](01-clinical-evidence.md).
 
@@ -47,6 +53,20 @@ Only used for grading a case, never as the headline. Default weights:
 ```json
 { "tasks": 0.30, "sp": 0.25, "coverage": 0.25, "safety": 0.20 }
 ```
+
+### More than one valid route
+
+Scoring only a canonical pathway produces false negatives for experienced
+operators who take an equally valid route, and false positives for novices who
+learn to "beat" a fixed path (Sun 2026). Cases can therefore declare the
+inspection orders they accept:
+
+```json
+"rubric": { "inspection_order": ["RB1","RB2","RB3","RB5","RB6","LB1+2"] }
+```
+
+`structured_progress(order)` scores against it; the debrief always shows the
+route the learner actually took alongside the accepted ones.
 
 where `coverage` is DC/18 when the case does not specify target segments, and
 `safety` is 1 − contact penalty − 0.1 per logged error. Weights are case data: an
