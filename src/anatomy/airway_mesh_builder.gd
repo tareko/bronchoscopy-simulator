@@ -9,8 +9,8 @@ extends RefCounted
 ## keeps the repository free of large binary meshes and lets CT-derived trees
 ## use exactly the same renderer.
 
-const RADIAL_SEGMENTS := 14
-const SLICES_PER_SEGMENT := 3
+const RADIAL_SEGMENTS := 24
+const SLICES_PER_SEGMENT := 4
 const JOINT_OVERLAP := 0.35   ## fraction of the radius added at each end
 
 

@@ -14,6 +14,14 @@ target (see [docs/09-roadmap.md](docs/09-roadmap.md)).
 
 ---
 
+## Demo
+
+[![demo](media/poster.png)](media/bronchoscopy-simulator-demo.mp4)
+
+34 s, 1080p30, rendered frame-by-frame from the simulator itself
+(`./tools/render_demo.sh`) — not a screen recording. The still is a poster
+frame; click for the MP4.
+
 ## Why
 
 Flexible bronchoscopy is a psychomotor skill: you steer a 60 cm bending tube with

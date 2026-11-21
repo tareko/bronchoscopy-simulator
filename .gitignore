@@ -49,3 +49,8 @@ Thumbs.db
 
 # Godot import sidecars for documentation images
 hardware/prop/*.import
+
+# rendered demo frames (regenerate with tools/render_demo.sh)
+video/frames/
+video/test/
+media/*.import
