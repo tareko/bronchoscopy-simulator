@@ -44,6 +44,8 @@ var _caption_since := 0.0
 var _reached := false
 var _reach_time := -1.0
 var _stuck := 0
+var _fly_route := PackedVector3Array()
+var _fly_path := PackedVector3Array()
 
 
 func _ready() -> void:
@@ -68,6 +70,7 @@ func _ready() -> void:
 	log.start("demo", tree.name, "", tree.bronchopulmonary_segments())
 
 	_build_stage()
+	_fly_route = _route_polyline("RB6")
 	_run()
 
 
@@ -153,7 +156,7 @@ func _build_stage() -> void:
 
 	scope_cam = Camera3D.new()
 	scope_cam.fov = 92.0
-	scope_cam.near = 0.0005
+	scope_cam.near = 0.0002
 	scope_cam.far = 1.0
 	world.add_child(scope_cam)
 
@@ -261,7 +264,7 @@ func _direct(t: float, dt: float) -> void:
 	elif t < endoscopic_from:
 		caption = "Print the handle, or play with two Vive wands"
 	elif t < 14.0:
-		caption = "The scope's actual path through the bronchial tree"
+		caption = "Virtual bronchoscopy: descending the trachea toward the carina"
 	elif t < 22.0:
 		caption = "Hold grip to insert  ·  trackpad to deflect  ·  wrist to torque"
 	elif t < 30.0:
@@ -288,46 +291,85 @@ func _shot_title(t: float) -> void:
 	hud_title.visible = t < 3.6
 
 
-func _shot_scope(t: float, dt: float) -> void:
-	# Through-the-lens rendering exposes the overlapping segment tubes at every
-	# bifurcation, which reads as broken geometry. Show the recorded path
-	# against the bronchial skeleton instead: honest, legible, and it is the
-	# data the simulator actually produces.
-	skeleton.visible = true
-	airway.visible = false
-	path_lines.visible = true
-	external_cam.current = true
+func _shot_scope(t: float, _dt: float) -> void:
+	# Virtual bronchoscopy: the camera is driven along the anatomical
+	# centreline, which is exactly how a virtual fly-through is defined. The
+	# physics-driven autopilot presses the tip into walls, so it is the wrong
+	# tool for a legible view.
+	skeleton.visible = false
+	airway.visible = true
+	path_lines.visible = false
+	external_cam.current = t >= 22.0
+	scope_cam.current = t < 22.0
 
-	var insert := 0.0
-	var lever := 0.0
-	var roll := 0.0
-	if not _reached:
-		var cmd := _autopilot("RB6")
-		# Stop at the bronchus intermedius: wide enough to read on camera.
-		insert = 1.1 if scope.get_insertion_depth_mm() < 268.0 else 0.0
-		lever = cmd["lever"]
-		roll = cmd["roll"]
-		if tree.is_descendant_of(scope.get_current_label(), "RB6"):
-			_reached = true
-			_reach_time = t
-	elif t < _reach_time + 3.0:
-		lever = 0.25 * sin(t * 2.0)   # gentle inspection sweep
-	else:
-		insert = -2.4                  # withdraw for the closing shot
+	var span := 22.0 - 9.0
+	var k := clampf((t - 9.0) / span, 0.0, 1.0)
+	k = k * k * (3.0 - 2.0 * k)                     # smoothstep
+	var depth := lerpf(150.0, 233.0, k)
+	var spot := _at_depth(_fly_route, depth)
+	var point_mm: Vector3 = spot["point"]          # anatomy is in millimetres
+	var point := point_mm * MM                     # the scene is in metres
+	var dir: Vector3 = spot["direction"]
 
-	var report := scope.advance(insert, lever, roll, dt)
-	log.track_frame(dt, report)
-	_update_path_lines()
-	tip_marker.visible = true
-	tip_marker.global_position = scope.get_tip() * MM
+	scope_cam.global_position = point - dir * 0.0004
+	var up := Vector3.UP
+	if absf(dir.dot(Vector3.UP)) > 0.98:
+		up = Vector3.FORWARD
+	scope_cam.look_at(point + dir * 0.05, up)
 
 	hud_segment.visible = true
-	hud_stats.visible = true
-	var label := scope.get_current_label()
+	hud_stats.visible = false
+	var label := tree.label_for_point(point_mm)
 	hud_segment.text = "%s   %s\n%.0f mm from incisors" % [
-		label if not label.is_empty() else "—",
-		_tree_name(label),
-		scope.get_insertion_depth_mm()]
+		label, _tree_name(label), depth]
+
+	# draw the travelled route for the closing shot
+	if _fly_path.is_empty() or _fly_path[_fly_path.size() - 1].distance_to(point) > 0.5:
+		_fly_path.append(point)
+	_update_fly_lines()
+
+	var tip := point
+	var orbit := t * 0.5
+	external_cam.global_position = tip + Vector3(cos(orbit) * 0.06, 0.03, sin(orbit) * 0.06)
+	external_cam.look_at(tip, Vector3.UP)
+
+
+func _route_polyline(target: String) -> PackedVector3Array:
+	var poly := PackedVector3Array()
+	for label in tree.route_to(target):
+		poly.append(tree.start_of(label))
+	poly.append(tree.end_of(target))
+	return poly
+
+
+## Point and tangent at `depth_mm` of arc along a polyline.
+func _at_depth(poly: PackedVector3Array, depth_mm: float) -> Dictionary:
+	var travelled := 0.0
+	for i in range(1, poly.size()):
+		var a := poly[i - 1]
+		var b := poly[i]
+		var seg := a.distance_to(b)
+		if seg < 0.0001:
+			continue
+		if travelled + seg >= depth_mm:
+			var t := (depth_mm - travelled) / seg
+			return {"point": a.lerp(b, t), "direction": (b - a).normalized()}
+		travelled += seg
+	return {"point": poly[poly.size() - 1],
+		"direction": (poly[poly.size() - 1] - poly[poly.size() - 2]).normalized()}
+
+
+func _update_fly_lines() -> void:
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for point in _fly_path:
+		im.surface_add_vertex(point * MM)
+	im.surface_end()
+	path_lines.mesh = im
+	path_lines.visible = true
+	tip_marker.visible = true
+	if not _fly_path.is_empty():
+		tip_marker.global_position = _fly_path[_fly_path.size() - 1] * MM
 
 
 func _shot_closing(t: float) -> void:
@@ -345,23 +387,22 @@ func _shot_closing(t: float) -> void:
 	hud_caption.text = "MIT licensed  ·  runs offline on Linux  ·  wands or printed prop"
 	hud_caption.modulate.a = 1.0
 	hud_caption.visible = true
-	_update_path_lines()
-	path_lines.visible = true
+	_update_fly_lines()
 	tip_marker.visible = true
 	tip_marker.global_position = scope.get_tip() * MM
 
 
 func _update_scope_camera() -> void:
-	# Centre the virtual optics on the lumen rather than on the tip: a real tip
-	# clamped against a 3 mm wall fills the frame with wall and reads as a bug.
-	var hit := tree.nearest_on_centerline(scope.get_tip())
-	var dir: Vector3 = Vector3(hit.get("axis_dir", Vector3.DOWN)).normalized()
-	var centre: Vector3 = Vector3(hit.get("on_axis", scope.get_tip())) * MM
-	scope_cam.global_position = centre - dir * 0.012
-	var up := Vector3.UP
+	# Exactly what the instrument sees: optics at the tip, looking along the
+	# scope's own heading. No centreline substitution, no retreat - if a wall
+	# fills the frame here, the wall is really there.
+	var tip := scope.get_tip()
+	var dir := scope.get_tip_direction().normalized()
+	scope_cam.global_position = tip - dir * 0.0005
+	var cam_up := Vector3.UP
 	if absf(dir.dot(Vector3.UP)) > 0.98:
-		up = Vector3.FORWARD
-	scope_cam.look_at(centre + dir * 0.04, up)
+		cam_up = Vector3.FORWARD
+	scope_cam.look_at(tip + dir * 0.05, cam_up)
 
 
 func _update_path_lines() -> void:
