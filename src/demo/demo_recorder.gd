@@ -30,6 +30,7 @@ var external_cam: Camera3D
 var scope_cam: Camera3D
 var path_lines: MeshInstance3D
 var tip_marker: MeshInstance3D
+var torch: SpotLight3D
 var airway: MeshInstance3D
 var skeleton: MeshInstance3D
 var _centre := Vector3.ZERO
@@ -144,7 +145,7 @@ func _build_stage() -> void:
 	environment.ambient_light_color = Color(0.6, 0.55, 0.6)
 	environment.ambient_light_energy = 0.42
 	environment.glow_enabled = true
-	environment.glow_intensity = 0.5
+	environment.glow_intensity = 0.10
 	we.environment = environment
 	world.add_child(we)
 
@@ -162,13 +163,13 @@ func _build_stage() -> void:
 
 	# The bronchoscope's own light: small warm spot at the tip. This is what
 	# makes the endoscopic view read as an instrument view rather than a tunnel.
-	var torch := SpotLight3D.new()
+	torch = SpotLight3D.new()
 	torch.position = Vector3(0, 0, -0.004)
 	torch.light_color = Color(1.0, 0.94, 0.86)
-	torch.light_energy = 4.5
-	torch.spot_range = 0.13
+	torch.light_energy = 0.55
+	torch.spot_range = 0.22
 	torch.spot_angle = 58.0
-	torch.spot_attenuation = 1.2
+	torch.spot_attenuation = 1.8
 	torch.shadow_enabled = false
 	scope_cam.add_child(torch)
 
