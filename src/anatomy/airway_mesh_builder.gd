@@ -44,43 +44,8 @@ static func build(tree: AirwayTree, material: Material = null) -> ArrayMesh:
 		var b := end + dir * overlap
 		_add_tapered_tube(st, a, b, radius_start, radius_end)
 
-	# Carinal spur: where a segment splits, its children cannot tile the parent
-	# bore, so a hole remains at the junction. A sphere parked just past the
-	# bifurcation fills it and reads as the carina, which is a ridge anyway.
-	for node in tree.nodes:
-		var label := str(node.get("label", ""))
-		var children: Array = tree.child_labels.get(label, [])
-		if children.size() < 2:
-			continue
-		var r := tree.radius_of(label)
-		var dir := tree.direction_of(label)
-		var centre := tree.end_of(label) + dir * r * 0.55
-		_add_spur(st, centre, r * 0.97)
-
 	var mesh := st.commit()
 	return mesh
-
-
-static func _add_spur(st: SurfaceTool, centre: Vector3, radius: float) -> void:
-	var rings := 8
-	var segments := 20
-	for row in rings:
-		var phi0 := PI * float(row) / float(rings)
-		var phi1 := PI * float(row + 1) / float(rings)
-		for col in segments:
-			var theta0 := TAU * float(col) / float(segments)
-			var theta1 := TAU * float(col + 1) / float(segments)
-			var p00 := _sphere_point(centre, radius, phi0, theta0)
-			var p01 := _sphere_point(centre, radius, phi0, theta1)
-			var p10 := _sphere_point(centre, radius, phi1, theta0)
-			var p11 := _sphere_point(centre, radius, phi1, theta1)
-			var n00 := (p00 - centre).normalized()
-			var n01 := (p01 - centre).normalized()
-			var n10 := (p10 - centre).normalized()
-			var n11 := (p11 - centre).normalized()
-			# outward normals: the spur is seen from the parent's lumen, so it
-			# must face the viewer or it reads as a black disc
-			_quad(st, p00, p10, p11, p01, n00, n10, n11, n01)
 
 
 static func _sphere_point(centre: Vector3, radius: float, phi: float, theta: float) -> Vector3:
