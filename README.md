@@ -39,6 +39,11 @@ cd bronchoscopy-simulator
 ./scripts/run.sh --editor       # open in the Godot editor
 ```
 
+Two Vive wands are enough to train — the printed scope prop is an optional
+upgrade, not a requirement. Wand mapping: grip + push to insert, trackpad Y for
+deflection, wrist roll for torque (details in
+[docs/04](docs/04-scope-model.md#wand-only-mode-the-default)).
+
 Desktop controls: `W`/`S` push and pull the scope, `A`/`D` deflect the tip,
 `Q`/`E` torque the shaft, `R` reset, `Tab` toggles between the external preview
 camera and the endoscopic view.
@@ -69,7 +74,8 @@ navigates to the right lower lobe's superior segment (RB6).
 | Desktop preview mode + keyboard control | working |
 | 3D-printable scope prop: spring lever, AS5600, Tracker shoe | designed (STLs committed) |
 | Lever mapping (deadzone/invert/expo) with tests | working |
-| OpenXR/Vive controller input, haptics | next |
+| Wand-only VR input: ratcheted insertion, trackpad lever, wrist torque | implemented (needs hardware test) |
+| Optional printed prop: auto-detected as the lever source | implemented |
 | Eight cases, guidance/minimap, debrief UI | next |
 | CT → airway pipeline (3D Slicer + TotalSegmentator) | designed, not implemented |
 | Instructor/observer view, AppImage/Flatpak packaging | planned |
@@ -104,8 +110,8 @@ tools/ct_pipeline/     DICOM → airway graph (designed; see docs/06)
 
 ## Hardware
 
-A printable bronchoscope prop (spring-centred lever + Vive Tracker shoe, ~€30 of
-parts plus a Tracker) lives in [`hardware/prop/`](hardware/prop/README.md) with a
+**Optional**: a printable bronchoscope prop (spring-centred lever + Vive Tracker
+shoe, ~€30 of parts plus a Tracker) lives in [`hardware/prop/`](hardware/prop/README.md) with a
 parametric OpenSCAD source, committed STLs, an RP2040/AS5600 firmware sketch and
 a printability validator. The evidence for why a physical handle matters more
 than force feedback is in [docs/08](docs/08-prior-art.md).

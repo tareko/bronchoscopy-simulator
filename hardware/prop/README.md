@@ -1,5 +1,8 @@
 # Vive scope prop — Mk1
 
+**Optional accessory.** The simulator is fully playable with two Vive wands
+only; build this if you want a real lever and a tracked handle.
+
 A printable flexible-bronchoscope handle with a spring-centred deflection lever
 and a quick-release Vive Tracker mount. It exists because the evidence says the
 physical scope interface is what gives commercial trainers their fidelity

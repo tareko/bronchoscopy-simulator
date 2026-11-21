@@ -20,7 +20,10 @@ Order is chosen so the riskiest assumptions fail early.
 - [ ] OpenXR action map binding `/interaction_profiles/htc/vive_controller` **and**
       `/user/vive_tracker_htcx/role/handheld_object` (Godot's default map omits both),
       with a pinned Godot version
-- [ ] Ratchet insertion mapping on grip; trackpad lever; wrist-rotation torque
+- [x] Wand-only input: ratcheted insertion, trackpad lever, wrist torque
+      (`src/input/*`, `src/xr/vr_scope_input.gd`) — implemented and unit-tested,
+      **not yet run on hardware**
+- [ ] Hardware test of wand mode; tune the 2.5× insertion scale
 - [ ] 90 Hz spike test on the 890M to replace the estimate-based budgets
 - [ ] Controller rumble proportional to wall contact
 - [ ] Seated panel view and standing immersive view

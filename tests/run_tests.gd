@@ -12,6 +12,8 @@ const EndoscopeScript := preload("res://src/scope/endoscope.gd")
 const ProcedureLogScript := preload("res://src/metrics/procedure_log.gd")
 const LeverMapperScript := preload("res://src/scope/lever_mapper.gd")
 const TrackingSanityScript := preload("res://src/xr/tracking_sanity.gd")
+const InsertionRatchetScript := preload("res://src/input/insertion_ratchet.gd")
+const TorqueTrackerScript := preload("res://src/input/torque_tracker.gd")
 
 const TREE_PATH := "res://assets/anatomy/generic_adult.json"
 
@@ -33,6 +35,7 @@ func _initialize() -> void:
 	_test_evidence_metrics()
 	_test_lever_mapper()
 	_test_tracking_sanity()
+	_test_wand_insertion_and_torque()
 	_test_scripted_run()
 
 	print("")
@@ -284,6 +287,54 @@ func _test_tracking_sanity() -> void:
 		"no motion at all must not raise a false alarm")
 	_check(TrackingSanityScript.advice("3dof_suspected").contains("Monado"),
 		"the 3-DoF advice should name the Monado build flags")
+
+
+func _test_wand_insertion_and_torque() -> void:
+	_begin("wand-only insertion ratchet and torque")
+	var ratchet = InsertionRatchetScript.new()
+	var axis := Vector3(0, 0, -1)          # wand forward
+	var p := Vector3.ZERO
+
+	ratchet.reset(p)
+	_check(is_zero_approx(ratchet.step(p, axis, false)),
+		"pushing without the clutch must not insert")
+	p += axis * 0.02                       # 2 cm forward
+	_check(is_zero_approx(ratchet.step(p, axis, false)),
+		"repositioning with the clutch released must not insert")
+
+	# engage and push 2 cm over ten frames => 50 mm at scale 2.5
+	_check(is_zero_approx(ratchet.step(p, axis, true)),
+		"engaging the clutch must not jump")
+	var pushed := 0.0
+	for i in 10:
+		p += axis * 0.002
+		pushed += ratchet.step(p, axis, true)
+	_check(absf(pushed - 50.0) < 0.5, "2 cm push at 2.5x should insert 50 mm, got %.2f" % pushed)
+
+	# a big flick is clamped per frame
+	p += axis * 0.5
+	var flick: float = ratchet.step(p, axis, true)
+	_check(absf(flick - ratchet.max_step_mm) < 0.01, "a flick must be clamped to max_step_mm")
+	_check(ratchet.step(p, axis, false) == 0.0, "releasing must immediately stop insertion")
+
+	# pulling back inserts negative (withdrawal)
+	ratchet.reset(Vector3.ZERO)
+	var pulled: float = ratchet.step(axis * -0.01, axis, true)
+	_check(pulled < 0.0, "pulling the controller back should withdraw")
+
+	# torque: 30 degrees of wrist roll reads as 30 degrees
+	var ref := Basis.IDENTITY
+	var rolled := Basis(Vector3(0, 0, 1), deg_to_rad(30.0))
+	var torque: float = TorqueTrackerScript.roll_degrees(rolled, ref, axis)
+	_check(absf(absf(torque) - 30.0) < 0.5, "30 deg of roll should read 30 deg, got %.2f" % torque)
+	_check(is_zero_approx(TorqueTrackerScript.roll_degrees(ref, ref, axis)),
+		"no rotation must read 0")
+	_check(is_zero_approx(TorqueTrackerScript.roll_degrees(ref, ref, Vector3.ZERO)),
+		"a degenerate axis must not crash or invent torque")
+	# opposite roll has opposite sign
+	var back: float = TorqueTrackerScript.roll_degrees(
+		Basis(Vector3(0, 0, 1), deg_to_rad(-30.0)), ref, axis)
+	_check(torque * back < 0.0, "opposite rolls must have opposite signs")
 
 
 func _test_scripted_run() -> void:

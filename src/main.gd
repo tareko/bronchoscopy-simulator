@@ -10,6 +10,7 @@ const AirwayTreeScript := preload("res://src/anatomy/airway_tree.gd")
 const EndoscopeScript := preload("res://src/scope/endoscope.gd")
 const ProcedureLogScript := preload("res://src/metrics/procedure_log.gd")
 const TrackingSanityScript := preload("res://src/xr/tracking_sanity.gd")
+const VRScopeInputScript := preload("res://src/xr/vr_scope_input.gd")
 const TREE_PATH := "res://assets/anatomy/generic_adult.json"
 const MM_TO_M := 0.001
 
@@ -25,6 +26,9 @@ var _hud: Label
 var _origin: XROrigin3D
 var _xr_camera: XRCamera3D
 var _scope_view := false
+var _vr_input: RefCounted = null
+var _left_hand: XRController3D = null
+var _right_hand: XRController3D = null
 
 # head-tracking sanity sampling (see src/xr/tracking_sanity.gd)
 var _track_elapsed := 0.0
@@ -146,6 +150,14 @@ func _setup_xr_if_available() -> void:
 		controller.name = hand.to_pascal_case()
 		controller.tracker = hand
 		_origin.add_child(controller)
+		if hand.begins_with("left"):
+			_left_hand = controller
+		else:
+			_right_hand = controller
+
+	# Wands are enough to play; the printed prop is an optional lever upgrade.
+	_vr_input = VRScopeInputScript.new()
+	_vr_input.setup(_right_hand, _left_hand)
 	print("XR: OpenXR active")
 
 
@@ -159,6 +171,16 @@ func _process(delta: float) -> void:
 		return
 	if Input.is_action_just_pressed("sim_toggle_view"):
 		_scope_view = not _scope_view
+
+	# VR takes over when a runtime is live; otherwise the keyboard drives it.
+	if _vr_input != null:
+		var command: Dictionary = _vr_input.update(delta)
+		var vr_report := scope.advance(
+			float(command["insert_mm"]), float(command["lever"]), float(command["roll_deg"]), delta)
+		log.track_frame(delta, vr_report)
+		_sample_tracking(delta)
+		_update_visuals()
+		return
 
 	var insert := 0.0
 	if Input.is_action_pressed("sim_insert"):
