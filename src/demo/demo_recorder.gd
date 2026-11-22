@@ -273,8 +273,9 @@ func _direct(t: float, dt: float) -> void:
 	# Single source of truth for what is on screen: the shot functions below
 	# set cameras and HUD, but visibility is decided here and nowhere else.
 	var outside := t >= 22.0
-	airway.visible = not outside
-	skeleton.visible = t < 8.0 or outside
+	# The textured tree is the product; the skeleton is only a title graphic.
+	airway.visible = not (t < 8.0)
+	skeleton.visible = t < 8.0
 	path_lines.visible = outside
 	tip_marker.visible = outside
 	torch.visible = not outside and t > 8.0
@@ -297,6 +298,7 @@ func _shot_title(t: float) -> void:
 	var radius := _extent * 1.55 + 0.06 - minf(t, 6.0) * 0.004
 	external_cam.global_position = _centre + Vector3(cos(angle) * radius, 0.02, sin(angle) * radius)
 	external_cam.look_at(_centre, Vector3.UP)
+	hud_title.position = Vector2(120, height * 0.40)
 	hud_title.text = "BRONCHOSCOPY SIMULATOR" if t < 3.6 else ""
 	hud_title.visible = t < 3.6
 
@@ -338,10 +340,15 @@ func _shot_scope(t: float, _dt: float) -> void:
 		_fly_path.append(point)
 	_update_fly_lines()
 
-	var tip := point
-	var orbit := t * 0.5
-	external_cam.global_position = tip + Vector3(cos(orbit) * 0.06, 0.03, sin(orbit) * 0.06)
-	external_cam.look_at(tip, Vector3.UP)
+	var orbit := t * 0.45
+	if t >= 22.0:
+		# closing: slow orbit of the whole textured airway
+		var radius := _extent * 1.55 + 0.07
+		external_cam.global_position = _centre + Vector3(cos(orbit) * radius, 0.03, sin(orbit) * radius)
+		external_cam.look_at(_centre, Vector3.UP)
+	else:
+		external_cam.global_position = point + Vector3(cos(orbit) * 0.06, 0.03, sin(orbit) * 0.06)
+		external_cam.look_at(point, Vector3.UP)
 
 
 func _route_polyline(target: String) -> PackedVector3Array:
@@ -390,6 +397,7 @@ func _shot_closing(t: float) -> void:
 	var radius := _extent * 1.5 + 0.06
 	external_cam.global_position = _centre + Vector3(cos(angle) * radius, 0.03, sin(angle) * radius)
 	external_cam.look_at(_centre, Vector3.UP)
+	hud_title.position = Vector2(120, height * 0.07)
 	hud_title.text = "github.com/tareko/bronchoscopy-simulator"
 	hud_title.visible = true
 	hud_segment.visible = false
