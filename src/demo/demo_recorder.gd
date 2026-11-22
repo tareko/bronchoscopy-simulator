@@ -270,6 +270,15 @@ func _direct(t: float, dt: float) -> void:
 		caption = "Hold grip to insert  ·  trackpad to deflect  ·  wrist to torque"
 	elif t < 30.0:
 		caption = "Eight clinical cases: anatomy, lesion, bleeding, foreign body…"
+	# Single source of truth for what is on screen: the shot functions below
+	# set cameras and HUD, but visibility is decided here and nowhere else.
+	var outside := t >= 22.0
+	airway.visible = not outside
+	skeleton.visible = t < 8.0 or outside
+	path_lines.visible = outside
+	tip_marker.visible = outside
+	torch.visible = not outside and t > 8.0
+
 	# the closing card owns its own caption
 	if t < closing_from:
 		_set_caption(caption, t)
